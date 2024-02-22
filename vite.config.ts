@@ -5,13 +5,17 @@ import vue from '@vitejs/plugin-vue'
 
 // https://vitejs.dev/config/
 export default defineConfig({
-  base:'/locadora-test/',
-  plugins: [
-    vue(),
-  ],
+  base: '/locadora-test/',
+  plugins: [vue()],
   resolve: {
     alias: {
       '@': fileURLToPath(new URL('./src', import.meta.url))
+    }
+  },
+  server: {
+    hmr: {
+      host: '0.0.0.0',
+      port: 5173
     }
   }
 })

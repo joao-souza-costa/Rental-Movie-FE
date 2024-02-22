@@ -1,0 +1,12 @@
+services:
+  app:
+    build:
+      context: .
+    ports:
+      - '5173:5173'
+    environment:
+      - NODE ENV=production
+      - VITE_MOVIE_API_URL=${VITE_MOVIE_API_URL}
+      - VITE_EXPIRE_USER=${VITE_EXPIRE_USER}
+      - VITE_MOVIE_API_KEY=${VITE_MOVIE_API_KEY}
+      - VITE_LOCATION_API_URL=${VITE_LOCATION_API_URL}

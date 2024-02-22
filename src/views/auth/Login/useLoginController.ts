@@ -19,7 +19,7 @@ export function useLoginController() {
       .then((token: number) => {
         authStore.signin(token)
       })
-      .catch((e: any) => toast.error(e))
+      .catch((e: ErrorEvent) => toast.error(e.message))
   }
 
   const schema = Yup.object().shape({

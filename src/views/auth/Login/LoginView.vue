@@ -7,7 +7,7 @@
     @submit="onSubmit"
     :validation-schema="schema"
     class="mt-[60px] flex flex-col items-center gap-4"
-  >
+  >   
     <base-input type="text" id="email" name="email" placeholder="Email" />
     <base-input type="password" id="password" name="password" placeholder="Senha" />
     <base-button :is-loading="isLoading" type="submit" class="w-full mt-2"> Entrar </base-button>
