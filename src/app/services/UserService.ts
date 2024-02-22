@@ -17,6 +17,7 @@ export interface iUser {
   document: string
   password: string
   status: enumUserStatus
+  expiresIn: number
 }
 
 export interface iCreateUserParams extends Omit<iUser, 'status' | 'id'> {

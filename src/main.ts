@@ -1,6 +1,7 @@
 import './assets/main.css'
 import "vue-toastification/dist/index.css";
 
+import '@/mocks/index'
 import App from './App.vue'
 
 import { createApp } from 'vue/dist/vue.esm-bundler'
@@ -9,7 +10,6 @@ import { VueQueryPlugin } from '@tanstack/vue-query'
 import Toast from 'vue-toastification'
 
 import router from './router'
-import type { provideToast } from 'vue-toastification'
 
 const app = createApp(App)
 

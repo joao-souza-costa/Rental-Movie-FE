@@ -9,7 +9,7 @@ import useLocalStorage from '../utils/useLocalStorage'
 
 export const useAuthStore = defineStore('auth', () => {
   const router = useRouter()
-  const accessToken = ref<boolean>(Boolean(useLocalStorage(loggedUserKey).get().id))
+  const accessToken = ref<boolean>(Boolean(useLocalStorage(loggedUserKey).get()?.id))
 
   const { data: user } = useQuery({
     queryKey: ['users', 'me'],
@@ -25,6 +25,7 @@ export const useAuthStore = defineStore('auth', () => {
 
   const signout = (): void => {
     accessToken.value = Boolean(false)
+    useLocalStorage(loggedUserKey).set('')
     router.push(LOGIN)
   }
 

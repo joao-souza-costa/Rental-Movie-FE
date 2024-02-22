@@ -18,6 +18,7 @@ import {
 } from '@/app/constants/route'
 
 import { useAuthStore } from '@/app/store/useAuthStore'
+import { toast } from '@/app/utils/toast'
 
 const router = createRouter({
   history: createWebHistory(),
@@ -46,7 +47,7 @@ const router = createRouter({
         {
           path: MOVIE_PAGE.path,
           name: MOVIE_PAGE.name,
-          component: MovieView,
+          component: MovieView
         },
         {
           path: CLIENT_PAGE.path,
@@ -67,6 +68,15 @@ router.beforeEach((to) => {
   const authStore = useAuthStore()
   const isLogged = authStore.accessToken
   const isPrivate = to.meta.requiresAuth
+
+  if (authStore.user && authStore.user.expiresIn < Date.now()) {
+    authStore.signout()
+    toast.error('Acesso expirado')
+    return {
+      name: LOGIN.name,
+      replace: true
+    }
+  }
 
   if (isPrivate && !isLogged) {
     return {
