@@ -39,11 +39,11 @@ export default {
 
     const hasEmail = users?.find((user) => user.email === params.email)
 
-    if (hasEmail) throw 'Email já cadastrado'
+    if (hasEmail) throw new Error('Email já cadastrado')
 
     const hasDocument = users?.find((user) => user.document === params.document)
 
-    if (hasDocument) throw 'CPF já cadastrado'
+    if (hasDocument) throw new Error('CPF já cadastrado')
 
     const user = { ...params, id: Math.random(), status: enumUserStatus.ACTIVE }
 
@@ -59,17 +59,17 @@ export default {
 
     const hasClient = userBd?.find((client) => client.id === params.id)
 
-    if (!hasClient) throw 'Cliente não existe'
+    if (!hasClient) throw new Error('Cliente não existe')
 
     const filteredBd = userBd?.filter((item) => item.id !== params.id)
 
     const hasEmail = filteredBd?.find((client) => client.email === params.email)
 
-    if (hasEmail) throw 'Email já cadastrado'
+    if (hasEmail) throw new Error('Email já cadastrado')
 
     const hasDocument = filteredBd?.find((client) => client.document === params.document)
 
-    if (hasDocument) throw 'CPF já cadastrado'
+    if (hasDocument) throw new Error('CPF já cadastrado')
 
     filteredBd!.push(params)
     usersStorage.set(filteredBd)

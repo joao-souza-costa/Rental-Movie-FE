@@ -11,9 +11,9 @@ export const useMovieStore = defineStore('movies', () => {
   const route = useRoute()
 
   const filters = ref<iMovieGetallParams>({
-    title: '',
+    title: 'Filmes',
     page: '1',
-    year: String(new Date().getFullYear())
+    year: ''
   })
 
   watch(

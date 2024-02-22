@@ -4,7 +4,9 @@ import { loggedUserKey } from '../constants/localStorageKeys'
 import { useMutation, useQuery, useQueryClient } from '@tanstack/vue-query'
 import clientService, {
   enumClientStatus,
-  type iGetAllClientsFilters
+  type iAddRentStatusParams,
+  type iGetAllClientsFilters,
+  type iUpdateRentStatusParams
 } from '../services/ClientService'
 import useLocalStorage from '../utils/useLocalStorage'
 import { useRoute } from 'vue-router'
@@ -55,11 +57,11 @@ export const useClientStore = defineStore('client', () => {
     return createMutation(values).then(invalidateClientsQuery)
   }
 
-  const createRent = (values: any) => {
+  const createRent = (values: iAddRentStatusParams) => {
     return createRentMutation(values).then(invalidateClientsQuery)
   }
 
-  const updateRentStatus = (values: any) => {
+  const updateRentStatus = (values: iUpdateRentStatusParams) => {
     return updateRentStatusMutation(values).then(invalidateClientsQuery)
   }
 

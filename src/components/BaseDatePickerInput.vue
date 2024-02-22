@@ -17,6 +17,7 @@
 
       <BasePopover.Content class="w-80 text-red-400">
         <VueDatePicker
+          :disabled="disabled"
           week-start="0"
           :model-value="internalValue"
           inline
@@ -47,11 +48,12 @@ import VueDatePicker from '@vuepic/vue-datepicker'
 import BasePopover from './Popover/BasePopover'
 import { formatDate } from '@/app/utils/formatDate'
 import CrossCircle from '@/assets/icons/CrossCircle.vue'
-import { computed, onMounted, ref, toRef, watch, type WritableComputedOptions } from 'vue'
+import { computed, ref, toRef } from 'vue'
 import { useField } from 'vee-validate'
 
 type iProps = {
   name: string
+  disabled?: boolean
 }
 
 const props = defineProps<iProps>()
@@ -88,6 +90,8 @@ const { errorMessage, value, setValue } = useField(name, undefined)
   --dp-primary-color: rgb(8 127 91 / var(--tw-bg-opacity));
   --dp-icon-color: rgb(8 127 91 / var(--tw-bg-opacity));
   --dp-menu-border-color: #fff;
+  --dp-disabled-color: rgb(73 80 87 / var(--tw-text-opacity));
+  --dp-disabled-color-text: rgb(73 80 87 / var(--tw-text-opacity));
 }
 
 .dp__theme_light .dp__outer_menu_wrap {

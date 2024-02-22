@@ -1,4 +1,5 @@
 import { MOVIE_PAGE } from '@/app/constants/route'
+import type { iRent } from '@/app/services/ClientService'
 import { useRentalStore } from '@/app/store/useRentalStore'
 import { useModals } from '@/app/utils/useModals'
 import { storeToRefs } from 'pinia'
@@ -10,13 +11,14 @@ export function useRentalController() {
   const router = useRouter()
   const rentalStore = useRentalStore()
 
-  const { isOpenModal, toggleModal } = useModals()
+  const { isOpenModal, toggleModal } = useModals<iRent>()
 
   const { rentalArray, filters } = storeToRefs(rentalStore)
 
   const openMoviesPage = () => {
     router.push({ path: MOVIE_PAGE.path, name: MOVIE_PAGE.name, query: { fromAction: 'true' } })
   }
+
   const getDate = () => {
     const startDate = new Date()
     const endDate = new Date(new Date().setDate(startDate.getDate() + 7))
@@ -33,6 +35,8 @@ export function useRentalController() {
     () => values,
     (v) => {
       filters.value.clientName = v.clientName
+      filters.value.startDate = v.dates[0]
+      filters.value.deliveryDate = v.dates[1]
     },
     { deep: true }
   )

@@ -10,13 +10,22 @@
       </p>
 
       <form class="mb-3 mt-3 flex flex-row gap-3">
-        <base-input type="text" id="clientName" name="clientName" placeholder="Nome do cliente" />
+        <base-input
+          class="flex flex-[2]"
+          type="text"
+          id="clientName"
+          name="clientName"
+          placeholder="Nome do cliente"
+        />
+
+        <base-date-picker-input class="flex flex-[1]" name="dates" />
       </form>
     </div>
 
     <rental-table :list="data" :is-loading="false" @select-rent="(v) => toggleModal('EDIT', v)" />
 
     <edit-modal
+      v-if="isOpenModal.EDIT_ITEM"
       :is-open="isOpenModal.EDIT"
       :rent="isOpenModal.EDIT_ITEM"
       @close="toggleModal('EDIT')"
@@ -29,6 +38,7 @@ import BaseButton from '@/components/BaseButton.vue'
 import { useRentalController } from './useRentalController'
 import RentalTable from './components/RentalTable.vue'
 import BaseInput from '@/components/BaseInput.vue'
+import BaseDatePickerInput from '@/components/BaseDatePickerInput.vue'
 import EditModal from './modals/EditModal.vue'
 
 const { data, openMoviesPage, isOpenModal, toggleModal } = useRentalController()

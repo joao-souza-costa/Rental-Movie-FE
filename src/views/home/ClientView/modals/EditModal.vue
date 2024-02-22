@@ -58,7 +58,7 @@ const onSubmit = (v: any) => {
     .updateClient(props.client!.id, { ...v, status: statusValue.value || props.client?.status })
     .then(() => toast.success('Cliente Editado com sucesso!'))
     .then(() => emit('close'))
-    .catch((e) => toast.error(e || 'Erro ao editar cliente'))
+    .catch((e) => toast.error(e.message|| 'Erro ao editar cliente'))
 }
 </script>
 

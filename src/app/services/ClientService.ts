@@ -51,6 +51,28 @@ export const STATUS_RENT_LABELS: { [key in enumRentStatus]: string } = {
   [enumRentStatus.CLOSED]: 'Devolvido'
 }
 
+export interface iUpdateRentStatusParams {
+  status: enumRentStatus
+  clientId: number
+  rentId: number
+}
+export interface iAddRentStatusParams {
+  name: string
+  dates: Date[]
+  clientId: number
+}
+
+export interface iRent {
+  clientId: number
+  clientName: string
+  deliveryDate: string
+  id: number
+  name: string
+  startDate: string
+  status: enumRentStatus
+  user: string
+}
+
 export interface iGetAllClientsFilters
   extends Partial<Pick<iClient, 'document' | 'firstName' | 'status'>> {}
 
@@ -67,11 +89,11 @@ export default {
 
     const hasEmail = clientBd?.find((client) => client.email === params.email)
 
-    if (hasEmail) throw 'Email já cadastrado'
+    if (hasEmail) throw new Error('Email já cadastrado')
 
     const hasDocument = clientBd?.find((client) => client.document === params.document)
 
-    if (hasDocument) throw 'CPF já cadastrado'
+    if (hasDocument) throw new Error('CPF já cadastrado')
 
     clientBd.push(client)
     clientsStorage.set(clientBd)
@@ -107,41 +129,41 @@ export default {
 
     const hasClient = clientBd?.find((client) => client.id === params.id)
 
-    if (!hasClient) throw 'Cliente não existe'
+    if (!hasClient) throw new Error('Cliente não existe')
 
     const filteredBd = clientBd?.filter((item) => item.id !== params.id)
 
     const hasEmail = filteredBd?.find((client) => client.email === params.email)
 
-    if (hasEmail) throw 'Email já cadastrado'
+    if (hasEmail) throw new Error('Email já cadastrado')
 
     const hasDocument = filteredBd?.find((client) => client.document === params.document)
 
-    if (hasDocument) throw 'CPF já cadastrado'
+    if (hasDocument) throw new Error('CPF já cadastrado')
 
     filteredBd!.push({ ...hasClient, ...params })
     clientsStorage.set(filteredBd)
 
     return Promise.resolve(params.id)
   },
-  addRent(params: { name: string; client: iClient; dates: Date[] }) {
+  addRent(params: iAddRentStatusParams) {
     const clientBd = clientsStorage.get() as iClient[] | null
-    const hasClient = clientBd?.find((client) => client.id === params.client.id)
+    const hasClient = clientBd?.find((client) => client.id === params.clientId)
 
-    if (!hasClient) throw 'Cliente não existe'
+    if (!hasClient) throw new Error('Cliente não existe')
 
     const hasActiveRent = hasClient.rents.find((movie) => movie.status === enumRentStatus.RENTED)
 
-    if (hasActiveRent) throw 'Cliente já tem um aluguel vigente'
+    if (hasActiveRent) throw new Error('Cliente já tem um aluguel vigente')
 
-    const filteredBd = clientBd?.filter((item) => item.id !== params.client.id)
+    const filteredBd = clientBd?.filter((item) => item.id !== params.clientId)
 
     const authStore = useAuthStore()
     hasClient.rents.push({
       id: Math.random(),
-      name: params.name,
       user: authStore.user!.name,
       status: enumRentStatus.RENTED,
+      name: params.name,
       startDate: params.dates[0].toISOString(),
       deliveryDate: params.dates[1].toISOString()
     })
@@ -151,15 +173,15 @@ export default {
 
     return Promise.resolve(true)
   },
-  updateRentStatus(params: { clientId: number; status: enumRentStatus; rentId: number }) {
+  updateRentStatus(params: iUpdateRentStatusParams) {
     const clientBd = clientsStorage.get() as iClient[] | null
     const hasClient = clientBd?.find((client) => client.id === params.clientId)
 
-    if (!hasClient) throw 'Cliente não existe'
+    if (!hasClient) throw new Error('Cliente não existe')
 
     const hasActiveRent = hasClient.rents.find((movie) => movie.id === params.rentId)
 
-    if (!hasActiveRent) throw 'Cliente não tem nenhum aluguel'
+    if (!hasActiveRent) throw new Error('Cliente não tem nenhum aluguel')
 
     const filteredBd = clientBd?.filter((item) => item.id !== params.clientId)
     const filteredRents = hasClient.rents?.filter((item) => item.id !== params.rentId)

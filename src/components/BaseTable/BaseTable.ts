@@ -29,7 +29,7 @@ const BaseTable = defineComponent({
     <div v-if="!isLoading && list?.length">
       <slot name="header" />
 
-      <slot v-for="item in list" :key="item" v-bind="item" />
+      <slot v-for="(item, index) in list" :key="index" v-bind="item" />
     </div>
   </div>`
 })

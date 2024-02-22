@@ -6,7 +6,7 @@
     open
     @update:open="$emit('close')"
   >
-    <rental-form @submit="onSubmit" :status="rent.status as enumRentStatus">
+    <rental-form @submit="onSubmit" :rent="rent">
       <base-button class="w-full" type="submit"> Salvar </base-button>
     </rental-form>
   </base-modal>
@@ -16,20 +16,20 @@
 import BaseModal from '@/components/BaseModal.vue'
 import RentalForm from '../components/RentalForm.vue'
 import BaseButton from '@/components/BaseButton.vue'
-import { enumRentStatus } from '@/app/services/ClientService'
+import { enumRentStatus, type iRent } from '@/app/services/ClientService'
 import { useClientStore } from '@/app/store/useClientStore'
 import { toast } from '@/app/utils/toast'
 
-const props = defineProps<{ isOpen: boolean; rent: any }>()
+const props = defineProps<{ isOpen: boolean; rent: iRent }>()
 const emit = defineEmits<{ close: [] }>()
 const clientStore = useClientStore()
 
-const onSubmit = (v: any) => {
+const onSubmit = (status: enumRentStatus) => {
   clientStore
-    .updateRentStatus({ ...props.rent.key, ...v })
+    .updateRentStatus({ status, clientId: props.rent.clientId, rentId: props.rent.id })
     .then(() => toast.success('Filme entregue com sucesso!'))
     .then(() => emit('close'))
-    .catch((e) => toast.error(e || 'Erro ao entregar filter'))
+    .catch((e) => toast.error(e.message || 'Erro ao entregar filter'))
 }
 </script>
 

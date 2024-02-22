@@ -1,4 +1,4 @@
-import { createRouter, createWebHistory } from 'vue-router'
+import { createRouter, createWebHashHistory } from 'vue-router'
 import AuthLayout from '@/layouts/AuthLayout.vue'
 import HomeLayout from '@/layouts/HomeLayout.vue'
 import LoginView from '@/views/auth/Login/LoginView.vue'
@@ -21,7 +21,7 @@ import { useAuthStore } from '@/app/store/useAuthStore'
 import { toast } from '@/app/utils/toast'
 
 const router = createRouter({
-  history: createWebHistory(),
+  history: createWebHashHistory(),
   routes: [
     {
       path: DASH.path,

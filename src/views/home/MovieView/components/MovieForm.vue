@@ -21,24 +21,22 @@ import BaseDatePickerInput from '@/components/BaseDatePickerInput.vue'
 
 import { useMovieFormController } from './useMovieFormController'
 import { watch } from 'vue'
+import type { iClient } from '@/app/services/ClientService'
 
 type tEmit = {
   (e: 'submit', v: GenericObject): void
 }
 
 type tProps = {
-  showConfirmPassword?: boolean
   initialValues?: {
     name?: string
-    clientName?: string
+    client?: iClient
     document?: string
-    dates?: string[]
+    dates?: Date[]
   }
 }
 
-const props = withDefaults(defineProps<tProps>(), {
-  showConfirmPassword: true
-})
+const props = defineProps<tProps>()
 const emit = defineEmits<tEmit>()
 
 const { schema, clients } = useMovieFormController()
@@ -57,7 +55,13 @@ const { values, setFieldValue, handleSubmit } = useForm({
   validationSchema: schema
 })
 
-const onSubmit = handleSubmit((values) => emit('submit', values))
+const onSubmit = handleSubmit(({ dates, name, client }) =>
+  emit('submit', {
+    clientId: client?.id,
+    dates,
+    name
+  })
+)
 
 watch(
   () => values,

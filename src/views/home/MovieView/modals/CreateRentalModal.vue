@@ -23,12 +23,12 @@ defineProps<{ isOpen: boolean; movie?: iMovie }>()
 const emit = defineEmits<{ close: [] }>()
 
 const clientStore = useClientStore()
-const onSubmit = (v: any) => {
+const onSubmit = ({ name, dates, clientId }: any) => {
   clientStore
-    .createRent(v)
+    .createRent({ name, dates, clientId })
     .then(() => toast.success('Filme alugado com sucesso'))
     .then(() => emit('close'))
-    .catch((e) => toast.error(e || 'Erro ao alugar filme'))
+    .catch((e) => toast.error(e.message || 'Erro ao alugar filme'))
 }
 </script>
 

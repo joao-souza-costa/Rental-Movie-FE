@@ -1,5 +1,5 @@
 import AuthService from '@/app/services/AuthService'
-import type { signInParams } from '@/app/services/AuthService'
+import type { iSignInParams } from '@/app/services/AuthService'
 import { useMutation } from '@tanstack/vue-query'
 import * as Yup from 'yup'
 import { useAuthStore } from '@/app/store/useAuthStore'
@@ -9,12 +9,12 @@ export function useLoginController() {
   const authStore = useAuthStore()
 
   const { mutateAsync, isPending } = useMutation({
-    mutationFn: async (values: signInParams) => {
+    mutationFn: async (values: iSignInParams) => {
       return AuthService.signIn(values)
     }
   })
 
-  async function onSubmit(values: signInParams) {
+  async function onSubmit(values: iSignInParams) {
     return mutateAsync(values)
       .then((token: number) => {
         authStore.signin(token)

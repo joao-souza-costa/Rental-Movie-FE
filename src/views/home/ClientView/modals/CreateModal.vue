@@ -30,7 +30,7 @@ const onSubmit = (v: any) => {
     .createClient(v)
     .then(() => toast.success('Cliente criado com sucesso!'))
     .then(() => emit('close'))
-    .catch((e) => toast.error(e || 'Erro ao criar cliente'))
+    .catch((e) => toast.error(e.message|| 'Erro ao criar cliente'))
 }
 </script>
 

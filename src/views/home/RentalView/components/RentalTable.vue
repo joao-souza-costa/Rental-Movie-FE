@@ -14,16 +14,7 @@
       </BaseTable.Header>
     </template>
 
-    <template
-      #default="props: {
-        name: string
-        clientName: string
-        startDate: string
-        deliveryDate: string
-        status: enumRentStatus
-        user: iClient
-      }"
-    >
+    <template #default="props: iRent">
       <BaseTable.Cell @click="$emit('selectRent', props)">
         <div class="w-1/5">
           <span class="text-gray-700 text-base block text-ellipsis overflow-hidden">
@@ -36,10 +27,10 @@
           </span>
         </div>
         <div class="w-1/5 flex justify-end md:block">
-          {{ props.startDate }}
+          {{ formatDate(props.startDate) }}
         </div>
         <div class="w-1/5 flex justify-end md:block">
-          {{ props.deliveryDate }}
+          {{ formatDate(props.deliveryDate) }}
         </div>
         <div class="w-1/5 flex justify-end md:block">
           {{ STATUS_RENT_LABELS[props.status] }}
@@ -50,21 +41,13 @@
 </template>
 
 <script setup lang="ts">
-import { STATUS_RENT_LABELS, enumRentStatus, type iClient } from '@/app/services/ClientService'
+import { STATUS_RENT_LABELS, type iRent } from '@/app/services/ClientService'
+import { formatDate } from '@/app/utils/formatDate'
 import BaseTable from '@/components/BaseTable/BaseTable'
 
 defineProps<{ list: any[]; isLoading: boolean }>()
 defineEmits<{
-  selectRent: [
-    v: {
-      name: string
-      clientName: string
-      startDate: string
-      deliveryDate: string
-      status: enumRentStatus
-      user: iClient
-    }
-  ]
+  selectRent: [v: iRent]
 }>()
 </script>
 

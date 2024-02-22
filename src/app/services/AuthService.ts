@@ -21,7 +21,7 @@ export default {
         user.status === enumUserStatus.ACTIVE
     )
 
-    if (!user) throw 'Usuário não encontrado na base de usuários'
+    if (!user) throw new Error('Usuário não encontrado na base de usuários')
 
     loggedUserStorage.set({
       ...user,

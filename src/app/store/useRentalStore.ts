@@ -33,13 +33,9 @@ export const useRentalStore = defineStore('rental', () => {
 
       if (hasRent && handleFilter({ ...hasRent, ...item })) {
         acc.push({
-          name: hasRent.name,
-          clientName: `${item.firstName} ${item.lastName}`,
-          startDate: formatDate(hasRent.startDate),
-          deliveryDate: formatDate(hasRent.deliveryDate),
-          status: hasRent.status,
           clientId: item.id,
-          rentId: hasRent.id
+          clientName: `${item.firstName} ${item.lastName}`,
+          ...hasRent
         })
       }
 

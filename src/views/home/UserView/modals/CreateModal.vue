@@ -34,7 +34,7 @@ const onSubmit = (v: any) => {
     .createUser(v)
     .then(() => toast.success('Usuário criado com sucesso!'))
     .then(() => emit('close'))
-    .catch((e) => toast.error(e || 'Erro ao criar usuário'))
+    .catch((e) => toast.error(e.message|| 'Erro ao criar usuário'))
 }
 </script>
 

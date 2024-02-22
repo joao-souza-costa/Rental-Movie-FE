@@ -58,7 +58,7 @@ const onSubmit = (v: any) => {
     .updateUser(props.user!.id, { ...v, status: statusValue.value })
     .then(() => toast.success('Usuário Editado com sucesso!'))
     .then(() => emit('close'))
-    .catch((e) => toast.error(e || 'Erro ao editar usuário'))
+    .catch((e) => toast.error(e.message|| 'Erro ao editar usuário'))
 }
 </script>
 
