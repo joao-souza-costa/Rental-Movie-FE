@@ -53,7 +53,7 @@
 
     <edit-modal
       :is-open="isOpenModal.EDIT"
-      :client="isOpenModal.EDIT_CLIENT"
+      :client="isOpenModal.EDIT_ITEM"
       @close="toggleModal('EDIT')"
     />
   </section>

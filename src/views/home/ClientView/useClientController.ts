@@ -1,27 +1,15 @@
 import { type enumClientStatus, type iClient } from '@/app/services/ClientService'
 import { useClientStore } from '@/app/store/useClientStore'
 import useDebounce from '@/app/utils/useDebounce'
+import { useModals } from '@/app/utils/useModals'
 import { storeToRefs } from 'pinia'
-import { reactive } from 'vue'
 import { useRouter } from 'vue-router'
 
 export function useClientController() {
   const { clients, isLoading, isRefetching, filters } = storeToRefs(useClientStore())
   const router = useRouter()
-  const isOpenModal = reactive<{
-    CREATE: boolean
-    EDIT: boolean
-    EDIT_CLIENT: iClient | undefined
-  }>({
-    CREATE: false,
-    EDIT: false,
-    EDIT_CLIENT: undefined
-  })
 
-  const toggleModal = (type: 'CREATE' | 'EDIT', client?: iClient): void => {
-    if (type === 'EDIT' && client) isOpenModal.EDIT_CLIENT = client
-    isOpenModal[type] = !isOpenModal[type]
-  }
+  const { isOpenModal, toggleModal } = useModals<iClient>()
 
   const updateFilters = (
     filter: 'status' | 'firstName' | 'document',

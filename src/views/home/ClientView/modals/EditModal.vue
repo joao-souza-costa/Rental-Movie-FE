@@ -10,7 +10,7 @@
       <template #statusField>
         <base-input-select
           class="flex flex-[1]"
-          :initial-value="statusValue"
+          :initial-value="client?.status"
           :options="options"
           name="status"
           id="status"
@@ -41,7 +41,7 @@ const props = defineProps<{ isOpen: boolean; client?: iClient }>()
 const emit = defineEmits<{ close: [] }>()
 const clientStore = useClientStore()
 
-const statusValue = ref(props.client?.status)
+const statusValue = ref()
 const options = [
   {
     value: enumClientStatus.ACTIVE,
@@ -55,7 +55,7 @@ const options = [
 
 const onSubmit = (v: any) => {
   clientStore
-    .updateClient(props.client!.id, { ...v, status: statusValue.value })
+    .updateClient(props.client!.id, { ...v, status: statusValue.value || props.client?.status })
     .then(() => toast.success('Cliente Editado com sucesso!'))
     .then(() => emit('close'))
     .catch((e) => toast.error(e || 'Erro ao editar cliente'))
