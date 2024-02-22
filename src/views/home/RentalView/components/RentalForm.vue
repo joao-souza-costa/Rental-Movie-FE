@@ -1,7 +1,7 @@
 <template>
   <Form
     @submit="(v) => $emit('submit', v.status)"
-    :initial-values="{ ...rent, dates }"
+    :initial-values="{ ...rental, dates }"
     class="mt-5 flex flex-col items-center gap-4"
   >
     <base-input class="w-full" name="name" disabled type="text" id="status" placeholder="Nome" />
@@ -43,25 +43,25 @@ import { Form } from 'vee-validate'
 import BaseInputSelect from '@/components/BaseInputSelect.vue'
 import BaseDatePickerInput from '@/components/BaseDatePickerInput.vue'
 import BaseInput from '@/components/BaseInput.vue'
-import { STATUS_RENT_LABELS, enumRentStatus, type iRent } from '@/app/services/ClientService'
+import { STATUS_RENTAL_LABELS, enumRentalStatus, type iRental } from '@/app/services/ClientService'
 import { computed } from 'vue'
 
 type tEmit = {
-  (e: 'submit', v: enumRentStatus): void
+  (e: 'submit', v: enumRentalStatus): void
 }
 
 type tProps = {
-  rent: iRent
+  rental: iRental
 }
 
 const options = [
   {
-    value: enumRentStatus.CLOSED,
-    label: STATUS_RENT_LABELS.CLOSED
+    value: enumRentalStatus.CLOSED,
+    label: STATUS_RENTAL_LABELS.CLOSED
   },
   {
-    value: enumRentStatus.RENTED,
-    label: STATUS_RENT_LABELS.RENTED
+    value: enumRentalStatus.RENTED,
+    label: STATUS_RENTAL_LABELS.RENTED
   }
 ]
 
@@ -69,6 +69,6 @@ const props = defineProps<tProps>()
 defineEmits<tEmit>()
 
 const dates = computed<string[]>(() => {
-  return [props.rent.startDate, props.rent.deliveryDate]
+  return [props.rental.startDate, props.rental.deliveryDate]
 })
 </script>

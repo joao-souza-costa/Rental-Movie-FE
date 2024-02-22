@@ -17,14 +17,14 @@ export interface iClient {
   city: string
   state: string
   status: enumClientStatus
-  rents: iRentMovie[]
+  rentals: iRentalMovie[]
 }
 
-export interface iRentMovie {
+export interface iRentalMovie {
   id: number
   name: string
   user: string
-  status: enumRentStatus
+  status: enumRentalStatus
   startDate: string
   deliveryDate: string
 }
@@ -41,35 +41,35 @@ export const STATUS_LABELS: { [key in enumClientStatus]: string } = {
   [enumClientStatus.ALL]: 'Todos'
 }
 
-export enum enumRentStatus {
+export enum enumRentalStatus {
   RENTED = 'RENTED',
   CLOSED = 'CLOSED'
 }
 
-export const STATUS_RENT_LABELS: { [key in enumRentStatus]: string } = {
-  [enumRentStatus.RENTED]: 'Alugado',
-  [enumRentStatus.CLOSED]: 'Devolvido'
+export const STATUS_RENTAL_LABELS: { [key in enumRentalStatus]: string } = {
+  [enumRentalStatus.RENTED]: 'Alugado',
+  [enumRentalStatus.CLOSED]: 'Devolvido'
 }
 
-export interface iUpdateRentStatusParams {
-  status: enumRentStatus
+export interface iUpdateRentalStatusParams {
+  status: enumRentalStatus
   clientId: number
-  rentId: number
+  rentalId: number
 }
-export interface iAddRentStatusParams {
+export interface iAddRentalStatusParams {
   name: string
   dates: Date[]
   clientId: number
 }
 
-export interface iRent {
+export interface iRental {
   clientId: number
   clientName: string
   deliveryDate: string
   id: number
   name: string
   startDate: string
-  status: enumRentStatus
+  status: enumRentalStatus
   user: string
 }
 
@@ -77,10 +77,10 @@ export interface iGetAllClientsFilters
   extends Partial<Pick<iClient, 'document' | 'firstName' | 'status'>> {}
 
 export default {
-  create: async (params: Omit<iClient, 'id' | 'status' | 'rents'>) => {
+  create: async (params: Omit<iClient, 'id' | 'status' | 'rentals'>) => {
     const clientBd = clientsStorage.get() as iClient[] | null
 
-    const client = { ...params, id: Math.random(), status: enumClientStatus.ACTIVE, rents: [] }
+    const client = { ...params, id: Math.random(), status: enumClientStatus.ACTIVE, rentals: [] }
 
     if (!clientBd) {
       clientsStorage.set([client])
@@ -146,23 +146,25 @@ export default {
 
     return Promise.resolve(params.id)
   },
-  addRent(params: iAddRentStatusParams) {
+  addRental(params: iAddRentalStatusParams) {
     const clientBd = clientsStorage.get() as iClient[] | null
     const hasClient = clientBd?.find((client) => client.id === params.clientId)
 
     if (!hasClient) throw new Error('Cliente não existe')
 
-    const hasActiveRent = hasClient.rents.find((movie) => movie.status === enumRentStatus.RENTED)
+    const hasActiveRental = hasClient.rentals.find(
+      (movie) => movie.status === enumRentalStatus.RENTED
+    )
 
-    if (hasActiveRent) throw new Error('Cliente já tem um aluguel vigente')
+    if (hasActiveRental) throw new Error('Cliente já tem um aluguel vigente')
 
     const filteredBd = clientBd?.filter((item) => item.id !== params.clientId)
 
     const authStore = useAuthStore()
-    hasClient.rents.push({
+    hasClient.rentals.push({
       id: Math.random(),
       user: authStore.user!.name,
-      status: enumRentStatus.RENTED,
+      status: enumRentalStatus.RENTED,
       name: params.name,
       startDate: params.dates[0].toISOString(),
       deliveryDate: params.dates[1].toISOString()
@@ -173,20 +175,20 @@ export default {
 
     return Promise.resolve(true)
   },
-  updateRentStatus(params: iUpdateRentStatusParams) {
+  updateRentalStatus(params: iUpdateRentalStatusParams) {
     const clientBd = clientsStorage.get() as iClient[] | null
     const hasClient = clientBd?.find((client) => client.id === params.clientId)
 
     if (!hasClient) throw new Error('Cliente não existe')
 
-    const hasActiveRent = hasClient.rents.find((movie) => movie.id === params.rentId)
+    const hasActiveRental = hasClient.rentals.find((movie) => movie.id === params.rentalId)
 
-    if (!hasActiveRent) throw new Error('Cliente não tem nenhum aluguel')
+    if (!hasActiveRental) throw new Error('Cliente não tem nenhum aluguel')
 
     const filteredBd = clientBd?.filter((item) => item.id !== params.clientId)
-    const filteredRents = hasClient.rents?.filter((item) => item.id !== params.rentId)
+    const filteredRentals = hasClient.rentals?.filter((item) => item.id !== params.rentalId)
 
-    hasClient.rents = [...filteredRents, { ...hasActiveRent, status: params.status }]
+    hasClient.rentals = [...filteredRentals, { ...hasActiveRental, status: params.status }]
 
     filteredBd?.push(hasClient)
     clientsStorage.set(filteredBd)

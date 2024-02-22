@@ -12,7 +12,7 @@ export default [
     city: 'Manaus',
     state: 'AM',
     id: 0.9270295645322753,
-    rents: []
+    rentals: []
   },
   {
     firstName: 'User4',
@@ -27,7 +27,7 @@ export default [
     city: 'São Paulo',
     state: 'PR',
     id: 0.805676851278283,
-    rents: []
+    rentals: []
   },
   {
     firstName: 'User5',
@@ -42,7 +42,7 @@ export default [
     city: 'Salvador',
     state: 'BA',
     id: 0.7166398890014773,
-    rents: []
+    rentals: []
   },
   {
     firstName: 'User6',
@@ -57,7 +57,7 @@ export default [
     city: 'Rio de Janeiro',
     state: 'AM',
     id: 0.584096585451557,
-    rents: []
+    rentals: []
   },
   {
     firstName: 'User7',
@@ -72,7 +72,7 @@ export default [
     city: 'Salvador',
     state: 'CE',
     id: 0.8638386765742108,
-    rents: []
+    rentals: []
   },
   {
     firstName: 'User8',
@@ -87,7 +87,7 @@ export default [
     city: 'São Paulo',
     state: 'PR',
     id: 0.35017893934710154,
-    rents: []
+    rentals: []
   },
   {
     firstName: 'User9',
@@ -102,7 +102,7 @@ export default [
     city: 'Rio de Janeiro',
     state: 'AM',
     id: 0.4180551477931058,
-    rents: []
+    rentals: []
   },
   {
     firstName: 'User10',
@@ -117,7 +117,7 @@ export default [
     city: 'Salvador',
     state: 'BA',
     id: 0.7347521442717457,
-    rents: []
+    rentals: []
   },
   {
     firstName: 'User11',
@@ -132,7 +132,7 @@ export default [
     city: 'Belo Horizonte',
     state: 'MG',
     id: 0.8401582992473404,
-    rents: []
+    rentals: []
   },
   {
     firstName: 'User12',
@@ -147,7 +147,7 @@ export default [
     city: 'Fortaleza',
     state: 'RJ',
     id: 0.5150628328832181,
-    rents: []
+    rentals: []
   },
   {
     firstName: 'User13',
@@ -162,7 +162,7 @@ export default [
     city: 'Recife',
     state: 'AM',
     id: 0.8145032817803968,
-    rents: []
+    rentals: []
   },
   {
     firstName: 'User14',
@@ -177,7 +177,7 @@ export default [
     city: 'Belo Horizonte',
     state: 'DF',
     id: 0.7912261005840941,
-    rents: []
+    rentals: []
   },
   {
     firstName: 'User15',
@@ -192,7 +192,7 @@ export default [
     city: 'Brasília',
     state: 'RS',
     id: 0.4803542975151047,
-    rents: []
+    rentals: []
   },
   {
     firstName: 'User16',
@@ -207,7 +207,7 @@ export default [
     city: 'Manaus',
     state: 'CE',
     id: 0.8617936079741881,
-    rents: []
+    rentals: []
   },
   {
     firstName: 'User17',
@@ -222,7 +222,7 @@ export default [
     city: 'Rio de Janeiro',
     state: 'AM',
     id: 0.8281443664642318,
-    rents: []
+    rentals: []
   },
   {
     firstName: 'User18',
@@ -237,7 +237,7 @@ export default [
     city: 'Curitiba',
     state: 'DF',
     id: 0.1647332691620096,
-    rents: []
+    rentals: []
   },
   {
     firstName: 'User19',
@@ -252,7 +252,7 @@ export default [
     city: 'Brasília',
     state: 'DF',
     id: 0.08429766465778998,
-    rents: []
+    rentals: []
   },
   {
     firstName: 'User20',
@@ -267,7 +267,7 @@ export default [
     city: 'Recife',
     state: 'PE',
     id: 0.6516844740881764,
-    rents: []
+    rentals: []
   },
   {
     firstName: 'User3',
@@ -282,7 +282,7 @@ export default [
     city: 'Manaus',
     state: 'DF',
     id: 0.3059833001880372,
-    rents: [
+    rentals: [
       {
         id: 0.4477994148282294,
         name: 'Pirates of the Caribbean: Dead Men Tell No Tales',
@@ -306,7 +306,7 @@ export default [
     city: 'Curitiba',
     state: 'CE',
     id: 0.9719723302492469,
-    rents: [
+    rentals: [
       {
         name: 'Pas de vague',
         user: 'João Victor Costa Souza',

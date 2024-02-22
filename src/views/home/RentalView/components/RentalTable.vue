@@ -14,8 +14,8 @@
       </BaseTable.Header>
     </template>
 
-    <template #default="props: iRent">
-      <BaseTable.Cell @click="$emit('selectRent', props)">
+    <template #default="props: iRental">
+      <BaseTable.Cell @click="$emit('selectRental', props)">
         <div class="w-1/5">
           <span class="text-gray-700 text-base block text-ellipsis overflow-hidden">
             {{ props.name }}
@@ -33,7 +33,7 @@
           {{ formatDate(props.deliveryDate) }}
         </div>
         <div class="w-1/5 flex justify-end md:block">
-          {{ STATUS_RENT_LABELS[props.status] }}
+          {{ STATUS_RENTAL_LABELS[props.status] }}
         </div>
       </BaseTable.Cell>
     </template>
@@ -41,13 +41,13 @@
 </template>
 
 <script setup lang="ts">
-import { STATUS_RENT_LABELS, type iRent } from '@/app/services/ClientService'
+import { STATUS_RENTAL_LABELS, type iRental } from '@/app/services/ClientService'
 import { formatDate } from '@/app/utils/formatDate'
 import BaseTable from '@/components/BaseTable/BaseTable'
 
 defineProps<{ list: any[]; isLoading: boolean }>()
 defineEmits<{
-  selectRent: [v: iRent]
+  selectRental: [v: iRental]
 }>()
 </script>
 

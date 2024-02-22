@@ -1,5 +1,5 @@
 import { MOVIE_PAGE } from '@/app/constants/route'
-import type { iRent } from '@/app/services/ClientService'
+import type { iRental } from '@/app/services/ClientService'
 import { useRentalStore } from '@/app/store/useRentalStore'
 import { useModals } from '@/app/utils/useModals'
 import { storeToRefs } from 'pinia'
@@ -11,7 +11,7 @@ export function useRentalController() {
   const router = useRouter()
   const rentalStore = useRentalStore()
 
-  const { isOpenModal, toggleModal } = useModals<iRent>()
+  const { isOpenModal, toggleModal } = useModals<iRental>()
 
   const { rentalArray, filters } = storeToRefs(rentalStore)
 

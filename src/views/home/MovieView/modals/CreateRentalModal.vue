@@ -25,7 +25,7 @@ const emit = defineEmits<{ close: [] }>()
 const clientStore = useClientStore()
 const onSubmit = ({ name, dates, clientId }: any) => {
   clientStore
-    .createRent({ name, dates, clientId })
+    .createRental({ name, dates, clientId })
     .then(() => toast.success('Filme alugado com sucesso'))
     .then(() => emit('close'))
     .catch((e) => toast.error(e.message || 'Erro ao alugar filme'))

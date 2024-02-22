@@ -1,7 +1,7 @@
 import { defineStore, storeToRefs } from 'pinia'
 import { useClientStore } from './useClientStore'
 import { computed, ref } from 'vue'
-import { enumRentStatus } from '../services/ClientService'
+import { enumRentalStatus } from '../services/ClientService'
 import { formatDate } from '../utils/formatDate'
 
 export const useRentalStore = defineStore('rental', () => {
@@ -29,13 +29,13 @@ export const useRentalStore = defineStore('rental', () => {
 
   const rentalArray = computed(() => {
     return clients.value?.reduce((acc, item) => {
-      const hasRent = item.rents?.find((rent) => rent.status === enumRentStatus.RENTED)
+      const hasRental = item.rentals?.find((rent) => rent.status === enumRentalStatus.RENTED)
 
-      if (hasRent && handleFilter({ ...hasRent, ...item })) {
+      if (hasRental && handleFilter({ ...hasRental, ...item })) {
         acc.push({
           clientId: item.id,
           clientName: `${item.firstName} ${item.lastName}`,
-          ...hasRent
+          ...hasRental
         })
       }
 
