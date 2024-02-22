@@ -1,6 +1,7 @@
+import { LOCATION_API_URL } from '../constants/envConstants'
 import { httpClient } from './Client'
 
-const client = httpClient('https://viacep.com.br/ws')
+const client = httpClient(LOCATION_API_URL)
 
 export interface iAddress {
   cep: string

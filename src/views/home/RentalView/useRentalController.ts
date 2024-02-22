@@ -1,12 +1,16 @@
 import { MOVIE_PAGE } from '@/app/constants/route'
 import { useRentalStore } from '@/app/store/useRentalStore'
+import { useModals } from '@/app/utils/useModals'
 import { storeToRefs } from 'pinia'
 import { useForm } from 'vee-validate'
+import { watch } from 'vue'
 import { useRouter } from 'vue-router'
 
 export function useRentalController() {
   const router = useRouter()
   const rentalStore = useRentalStore()
+
+  const { isOpenModal, toggleModal } = useModals()
 
   const { rentalArray, filters } = storeToRefs(rentalStore)
 
@@ -20,12 +24,23 @@ export function useRentalController() {
   }
   const { values } = useForm({
     initialValues: {
-      dates: getDate()
+      dates: getDate(),
+      clientName: ''
     }
   })
 
+  watch(
+    () => values,
+    (v) => {
+      filters.value.clientName = v.clientName
+    },
+    { deep: true }
+  )
+
   return {
     data: rentalArray,
-    openMoviesPage
+    openMoviesPage,
+    isOpenModal,
+    toggleModal
   }
 }

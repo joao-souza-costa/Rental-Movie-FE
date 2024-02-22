@@ -24,7 +24,7 @@
         user: iClient
       }"
     >
-      <BaseTable.Cell>
+      <BaseTable.Cell @click="$emit('selectRent', props)">
         <div class="w-1/5">
           <span class="text-gray-700 text-base block text-ellipsis overflow-hidden">
             {{ props.name }}
@@ -54,6 +54,18 @@ import { STATUS_RENT_LABELS, enumRentStatus, type iClient } from '@/app/services
 import BaseTable from '@/components/BaseTable/BaseTable'
 
 defineProps<{ list: any[]; isLoading: boolean }>()
+defineEmits<{
+  selectRent: [
+    v: {
+      name: string
+      clientName: string
+      startDate: string
+      deliveryDate: string
+      status: enumRentStatus
+      user: iClient
+    }
+  ]
+}>()
 </script>
 
 <style scoped></style>

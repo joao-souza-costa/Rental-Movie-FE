@@ -21,6 +21,7 @@ export interface iClient {
 }
 
 export interface iRentMovie {
+  id: number
   name: string
   user: string
   status: enumRentStatus
@@ -137,12 +138,33 @@ export default {
 
     const authStore = useAuthStore()
     hasClient.rents.push({
+      id: Math.random(),
       name: params.name,
       user: authStore.user!.name,
       status: enumRentStatus.RENTED,
       startDate: params.dates[0].toISOString(),
       deliveryDate: params.dates[1].toISOString()
     })
+
+    filteredBd?.push(hasClient)
+    clientsStorage.set(filteredBd)
+
+    return Promise.resolve(true)
+  },
+  updateRentStatus(params: { clientId: number; status: enumRentStatus; rentId: number }) {
+    const clientBd = clientsStorage.get() as iClient[] | null
+    const hasClient = clientBd?.find((client) => client.id === params.clientId)
+
+    if (!hasClient) throw 'Cliente não existe'
+
+    const hasActiveRent = hasClient.rents.find((movie) => movie.id === params.rentId)
+
+    if (!hasActiveRent) throw 'Cliente não tem nenhum aluguel'
+
+    const filteredBd = clientBd?.filter((item) => item.id !== params.clientId)
+    const filteredRents = hasClient.rents?.filter((item) => item.id !== params.rentId)
+
+    hasClient.rents = [...filteredRents, { ...hasActiveRent, status: params.status }]
 
     filteredBd?.push(hasClient)
     clientsStorage.set(filteredBd)

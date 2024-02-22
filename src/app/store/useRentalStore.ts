@@ -17,8 +17,6 @@ export const useRentalStore = defineStore('rental', () => {
   })
 
   const handleFilter = (value: any) => {
-    let hasStartDate = true
-    let hasDeliveryDate = true
     let hasClientName = true
 
     if (filters.value.clientName) {
@@ -26,15 +24,7 @@ export const useRentalStore = defineStore('rental', () => {
       hasClientName = name.includes(filters.value.clientName)
     }
 
-    if (filters.value.deliveryDate) {
-      hasDeliveryDate = new Date(value.deliveryDate) <= new Date(filters.value.deliveryDate)
-    }
-
-    if (filters.value.startDate) {
-      hasStartDate = new Date(filters.value.startDate) <= new Date(value.startDate)
-    }
-
-    return hasClientName && hasDeliveryDate && hasStartDate
+    return hasClientName
   }
 
   const rentalArray = computed(() => {
@@ -48,7 +38,8 @@ export const useRentalStore = defineStore('rental', () => {
           startDate: formatDate(hasRent.startDate),
           deliveryDate: formatDate(hasRent.deliveryDate),
           status: hasRent.status,
-          user: hasRent.user
+          clientId: item.id,
+          rentId: hasRent.id
         })
       }
 

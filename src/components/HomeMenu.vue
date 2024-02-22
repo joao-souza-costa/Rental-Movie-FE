@@ -2,35 +2,35 @@
   <div class="p-5 flex justify-start flex-col gap-3">
     <div
       class="min-h-[40x] outline-none flex items-center py-2 px-3 text-gray-800 text-base hover:bg-gray-100 rounded-2xl transition-colors cursor-pointer disabled:opacity-75 disabled:text-opacity-20 disabled:cursor-not-allowed"
-      :class="[$route.name === RENTAL_PAGE.name && '!bg-gray-100']"
+      :class="[$route.name === USER_PAGE.name && '!bg-gray-100']"
     >
-      <router-link :to="RENTAL_PAGE" class="w-full md:text-start text-center pl-4"
-        >Locações</router-link
-      >
-    </div>
-    <div
-      class="min-h-[40x] outline-none flex items-center py-2 px-3 text-gray-800 text-base hover:bg-gray-100 rounded-2xl transition-colors cursor-pointer disabled:opacity-75 disabled:text-opacity-20 disabled:cursor-not-allowed"
-      :class="[$route.name === MOVIE_PAGE.name && '!bg-gray-100']"
-    >
-      <router-link :to="MOVIE_PAGE" class="w-full md:text-start text-center pl-4"
-        >Filmes</router-link
-      >
+      <router-link :to="USER_PAGE" class="w-full md:text-start text-center pl-4">
+        Usuários
+      </router-link>
     </div>
     <div
       class="min-h-[40x] outline-none flex items-center py-2 px-3 text-gray-800 text-base hover:bg-gray-100 rounded-2xl transition-colors cursor-pointer disabled:opacity-75 disabled:text-opacity-20 disabled:cursor-not-allowed"
       :class="[$route.name === CLIENT_PAGE.name && '!bg-gray-100']"
     >
-      <router-link :to="CLIENT_PAGE" class="w-full md:text-start text-center pl-4"
-        >Clientes</router-link
-      >
+      <router-link :to="CLIENT_PAGE" class="w-full md:text-start text-center pl-4">
+        Clientes
+      </router-link>
     </div>
     <div
       class="min-h-[40x] outline-none flex items-center py-2 px-3 text-gray-800 text-base hover:bg-gray-100 rounded-2xl transition-colors cursor-pointer disabled:opacity-75 disabled:text-opacity-20 disabled:cursor-not-allowed"
-      :class="[$route.name === USER_PAGE.name && '!bg-gray-100']"
+      :class="[$route.name === RENTAL_PAGE.name && '!bg-gray-100']"
     >
-      <router-link :to="USER_PAGE" class="w-full md:text-start text-center pl-4"
-        >Usuários</router-link
-      >
+      <router-link :to="RENTAL_PAGE" class="w-full md:text-start text-center pl-4">
+        Locações
+      </router-link>
+    </div>
+    <div
+      class="min-h-[40x] outline-none flex items-center py-2 px-3 text-gray-800 text-base hover:bg-gray-100 rounded-2xl transition-colors cursor-pointer disabled:opacity-75 disabled:text-opacity-20 disabled:cursor-not-allowed"
+      :class="[$route.name === MOVIE_PAGE.name && '!bg-gray-100']"
+    >
+      <router-link :to="MOVIE_PAGE" class="w-full md:text-start text-center pl-4">
+        Filmes
+      </router-link>
     </div>
   </div>
 </template>

@@ -10,13 +10,17 @@
       </p>
 
       <form class="mb-3 mt-3 flex flex-row gap-3">
-        <base-input type="text" id="clientName" name="clientName" placeholder="Client" />
-
-        <base-date-picker-input class="w-full" name="dates" />
+        <base-input type="text" id="clientName" name="clientName" placeholder="Nome do cliente" />
       </form>
     </div>
 
-    <rental-table :list="data" :is-loading="false" />
+    <rental-table :list="data" :is-loading="false" @select-rent="(v) => toggleModal('EDIT', v)" />
+
+    <edit-modal
+      :is-open="isOpenModal.EDIT"
+      :rent="isOpenModal.EDIT_ITEM"
+      @close="toggleModal('EDIT')"
+    />
   </section>
 </template>
 
@@ -25,9 +29,9 @@ import BaseButton from '@/components/BaseButton.vue'
 import { useRentalController } from './useRentalController'
 import RentalTable from './components/RentalTable.vue'
 import BaseInput from '@/components/BaseInput.vue'
-import BaseDatePickerInput from '@/components/BaseDatePickerInput.vue'
+import EditModal from './modals/EditModal.vue'
 
-const { data, openMoviesPage } = useRentalController()
+const { data, openMoviesPage, isOpenModal, toggleModal } = useRentalController()
 </script>
 
 <style scoped></style>

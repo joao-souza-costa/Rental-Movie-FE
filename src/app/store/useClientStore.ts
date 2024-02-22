@@ -41,6 +41,12 @@ export const useClientStore = defineStore('client', () => {
     mutationFn: clientService.addRent
   })
 
+  const { mutateAsync: updateRentStatusMutation, isPending: updateRentStatusLoading } = useMutation(
+    {
+      mutationFn: clientService.updateRentStatus
+    }
+  )
+
   const invalidateClientsQuery = () => {
     return queryClient.invalidateQueries({ queryKey: ['clients'] })
   }
@@ -51,6 +57,10 @@ export const useClientStore = defineStore('client', () => {
 
   const createRent = (values: any) => {
     return createRentMutation(values).then(invalidateClientsQuery)
+  }
+
+  const updateRentStatus = (values: any) => {
+    return updateRentStatusMutation(values).then(invalidateClientsQuery)
   }
 
   const updateClient = (id: number, values: any) => {
@@ -85,6 +95,8 @@ export const useClientStore = defineStore('client', () => {
     createRentLoading,
     createClient,
     updateClient,
-    createRent
+    createRent,
+    updateRentStatus,
+    updateRentStatusLoading
   }
 })
