@@ -1,6 +1,6 @@
 ## 💻 Projeto
 
-O Locadora é uma plataforma simples e intuitiva para que você Gerenciar sua locadora.
+O Video Rental Manager é uma plataforma simples e intuitiva para que você Gerenciar sua locadora.
 
 ## 📥 Instalando o Projeto
 
