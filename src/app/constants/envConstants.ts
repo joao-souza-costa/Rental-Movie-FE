@@ -1,0 +1,5 @@
+const { VITE_MOVIE_API_URL, VITE_EXPIRE_USER, VITE_MOVIE_API_KEY } = import.meta.env
+
+export const EXPIRED_USER_HOURS = VITE_EXPIRE_USER || '76'
+export const MOVIE_KEY = VITE_MOVIE_API_KEY
+export const MOVIE_API_URL = VITE_MOVIE_API_URL
