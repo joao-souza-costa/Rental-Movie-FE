@@ -1,5 +1,5 @@
 import { MOVIE_PAGE } from '@/app/constants/route'
-import type { iRental } from '@/app/services/ClientService'
+import type { iRental } from '@/app/services/RentalService'
 import { useRentalStore } from '@/app/store/useRentalStore'
 import { useModals } from '@/app/utils/useModals'
 import { storeToRefs } from 'pinia'
@@ -13,21 +13,17 @@ export function useRentalController() {
 
   const { isOpenModal, toggleModal } = useModals<iRental>()
 
-  const { rentalArray, filters } = storeToRefs(rentalStore)
+  const { rentals, filters } = storeToRefs(rentalStore)
 
   const openMoviesPage = () => {
-    router.push({ path: MOVIE_PAGE.path, name: MOVIE_PAGE.name, query: { fromAction: 'true' } })
+    router.push(MOVIE_PAGE)
   }
 
-  const getDate = () => {
-    const startDate = new Date()
-    const endDate = new Date(new Date().setDate(startDate.getDate() + 7))
-    return [startDate, endDate]
-  }
   const { values } = useForm({
     initialValues: {
-      dates: getDate(),
-      clientName: ''
+      startDate: filters.value.startDate,
+      clientName: filters.value.clientName,
+      endDate: filters.value.deliveryDate
     }
   })
 
@@ -35,14 +31,15 @@ export function useRentalController() {
     () => values,
     (v) => {
       filters.value.clientName = v.clientName
-      filters.value.startDate = v.dates[0]
-      filters.value.deliveryDate = v.dates[1]
+      filters.value.startDate = v.startDate
+      filters.value.deliveryDate = v.endDate
+      router.push({ query: { ...filters.value } })
     },
     { deep: true }
   )
 
   return {
-    data: rentalArray,
+    data: rentals,
     openMoviesPage,
     isOpenModal,
     toggleModal

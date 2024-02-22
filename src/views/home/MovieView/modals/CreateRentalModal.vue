@@ -17,18 +17,18 @@ import BaseModal from '@/components/BaseModal.vue'
 import MovieForm from '../components/MovieForm.vue'
 import BaseButton from '@/components/BaseButton.vue'
 import type { iMovie } from '@/app/services/MovieService'
-import { useClientStore } from '@/app/store/useClientStore'
+import { useRentalStore } from '@/app/store/useRentalStore'
 import { toast } from '@/app/utils/toast'
 defineProps<{ isOpen: boolean; movie?: iMovie }>()
 const emit = defineEmits<{ close: [] }>()
 
-const clientStore = useClientStore()
+const rentalStore = useRentalStore()
 const onSubmit = ({ name, dates, clientId }: any) => {
-  clientStore
+  rentalStore
     .createRental({ name, dates, clientId })
     .then(() => toast.success('Filme alugado com sucesso'))
     .then(() => emit('close'))
-    .catch((e) => toast.error(e.message || 'Erro ao alugar filme'))
+    .catch((e: ErrorEvent) => toast.error(e.message || 'Erro ao alugar filme'))
 }
 </script>
 

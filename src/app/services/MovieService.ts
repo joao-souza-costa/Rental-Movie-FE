@@ -5,7 +5,7 @@ const client = httpClient(MOVIE_API_URL, { apiKey: MOVIE_KEY })
 
 export interface iMovieGetallParams {
   title: string
-  year: string
+  year?: string
   page?: string | undefined
 }
 

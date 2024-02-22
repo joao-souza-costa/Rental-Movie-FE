@@ -18,7 +18,8 @@
           placeholder="Nome do cliente"
         />
 
-        <base-date-picker-input class="flex flex-[1]" name="dates" />
+        <base-date-picker-input label="Data de locação" class="flex flex-[1]" name="startDate" />
+        <base-date-picker-input label="Data de entrega " class="flex flex-[1]" name="endDate" />
       </form>
     </div>
 

@@ -9,9 +9,9 @@
           @click="toggleOpen"
         >
           <label class="absolute left-[13px] top-1 pointer-events-none text-xs text-gray-700">
-            Datas
+            {{ label }}
           </label>
-          <span>{{ label }}</span>
+          <span>{{ formatValue }}</span>
         </button>
       </BasePopover.Trigger>
 
@@ -19,7 +19,7 @@
         <VueDatePicker
           :disabled="disabled"
           week-start="0"
-          :model-value="internalValue"
+          :model-value="datePickerValue"
           inline
           auto-apply
           :hide-navigation="['time', 'year', 'month']"
@@ -28,7 +28,7 @@
           calendar-cell-class-name="dp-custom-cell"
           locale="pt-BR"
           format="MM"
-          range
+          :range="range"
           @update:model-value="toggleOpen"
         />
       </BasePopover.Content>
@@ -54,20 +54,24 @@ import { useField } from 'vee-validate'
 type iProps = {
   name: string
   disabled?: boolean
+  range?: boolean
+  label: string
 }
 
 const props = defineProps<iProps>()
-
+const name = toRef(props, 'name')
 const isOpen = ref<boolean>(false)
 
-const toggleOpen = (v: any): void => {
-  if (isOpen.value) internalValue.value = v
-  isOpen.value = !isOpen.value
-}
+const normalValue = computed<Date>({
+  get() {
+    return new Date(value.value as string)
+  },
+  set(v) {
+    v instanceof Date && setValue(v.toISOString())
+  }
+})
 
-const name = toRef(props, 'name')
-
-const internalValue = computed<string[]>({
+const rangeValue = computed<string[]>({
   get() {
     return value.value as string[]
   },
@@ -76,13 +80,23 @@ const internalValue = computed<string[]>({
   }
 })
 
-const label = computed(() => {
-  const [start, end] = internalValue.value
-
-  return `${formatDate(start)} - ${formatDate(end)}`
-})
-
 const { errorMessage, value, setValue } = useField(name, undefined)
+
+const datePickerValue = props.range ? rangeValue : normalValue
+
+const toggleOpen = (v: any): void => {
+  if (isOpen.value) datePickerValue.value = v
+  isOpen.value = !isOpen.value
+}
+
+const formatValue = computed(() => {
+  if (props.range) {
+    const [start, end] = datePickerValue.value as string[]
+
+    return `${formatDate(start)} - ${formatDate(end)}`
+  }
+  return formatDate(datePickerValue.value)
+})
 </script>
 
 <style>

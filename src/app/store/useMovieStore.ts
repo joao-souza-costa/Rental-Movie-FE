@@ -11,20 +11,10 @@ export const useMovieStore = defineStore('movies', () => {
   const route = useRoute()
 
   const filters = ref<iMovieGetallParams>({
-    title: 'Filmes',
-    page: '1',
-    year: ''
+    title: route.query.title?.toString() || 'Filmes',
+    page: route.query.page?.toString() || '1',
+    year: route.query.year?.toString()
   })
-
-  watch(
-    () => route.query,
-    (v) => {
-      v.title && (filters.value.title = String(v.title))
-      v.page && (filters.value.page = String(v.page))
-      v.year && (filters.value.year = String(v.year))
-    },
-    { deep: true, immediate: true }
-  )
 
   const {
     data: movies,

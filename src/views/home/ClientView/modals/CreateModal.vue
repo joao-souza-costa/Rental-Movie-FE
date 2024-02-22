@@ -22,7 +22,7 @@ import { useClientStore } from '@/app/store/useClientStore'
 import { toast } from '@/app/utils/toast'
 
 defineProps<{ isOpen: boolean; client?: {} }>()
-const emit = defineEmits<{ close: []}>()
+const emit = defineEmits<{ close: [] }>()
 const clientStore = useClientStore()
 
 const onSubmit = (v: any) => {
@@ -30,7 +30,7 @@ const onSubmit = (v: any) => {
     .createClient(v)
     .then(() => toast.success('Cliente criado com sucesso!'))
     .then(() => emit('close'))
-    .catch((e) => toast.error(e.message|| 'Erro ao criar cliente'))
+    .catch((e: ErrorEventInit) => toast.error(e.message || 'Erro ao criar cliente'))
 }
 </script>
 

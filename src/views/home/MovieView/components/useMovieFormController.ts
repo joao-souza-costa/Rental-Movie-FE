@@ -3,7 +3,7 @@ import { storeToRefs } from 'pinia'
 import * as Yup from 'yup'
 
 export function useMovieFormController() {
-  const { clients } = storeToRefs(useClientStore())
+  const { clientsAll: clients } = storeToRefs(useClientStore())
 
   const schema = Yup.object().shape({
     client: Yup.object().required('Cliente é Obrigátorio'),

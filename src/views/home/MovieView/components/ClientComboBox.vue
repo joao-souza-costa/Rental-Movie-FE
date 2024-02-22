@@ -29,7 +29,7 @@
         class="w-full absolute z-[99] min-w-[160px] bg-white rounded rounded-2xl border border-gray-100 shadow-[0px_11px_20px_0px_rgba(0,0,0,0.10)]"
       >
         <ComboboxViewport class="p-[5px]">
-          <ComboboxGroup>
+          <ComboboxGroup class="max-h-[300px] overflow-auto scrollbar">
             <ComboboxItem
               v-for="(option, index) in options"
               :key="index"

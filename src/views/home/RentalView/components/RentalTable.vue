@@ -41,11 +41,11 @@
 </template>
 
 <script setup lang="ts">
-import { STATUS_RENTAL_LABELS, type iRental } from '@/app/services/ClientService'
+import { STATUS_RENTAL_LABELS, type iRental } from '@/app/services/RentalService'
 import { formatDate } from '@/app/utils/formatDate'
 import BaseTable from '@/components/BaseTable/BaseTable'
 
-defineProps<{ list: any[]; isLoading: boolean }>()
+defineProps<{ list?: iRental[]; isLoading: boolean }>()
 defineEmits<{
   selectRental: [v: iRental]
 }>()

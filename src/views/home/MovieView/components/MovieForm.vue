@@ -8,7 +8,12 @@
 
     <base-input type="text" id="document" name="document" placeholder="CPF" />
 
-    <base-date-picker-input class="w-full" name="dates" />
+    <base-date-picker-input
+      label="Data de alocação - Data de entrega"
+      class="w-full"
+      name="dates"
+      range
+    />
     <slot />
   </form>
 </template>

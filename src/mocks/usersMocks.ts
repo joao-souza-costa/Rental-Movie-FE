@@ -4,15 +4,17 @@ export default [
     email: 'larissa.santos@example.com',
     password: 'abcd1234',
     confirmPassword: 'abcd1234',
-    id: 0.22446486702940227,
-    status: 'ACTIVE'
+    document: '58482118412',
+    id: Math.random(),
+    status: 'INACTIVE'
   },
   {
     name: 'Pedro Almeida',
     email: 'pedro.almeida@example.com',
-    password: 'password123qwerty',
-    confirmPassword: 'password123qwerty',
-    id: 0.22446486702940227,
+    password: 'abcd1234',
+    confirmPassword: 'abcd1234',
+    document: '39795308335',
+    id: Math.random(),
     status: 'ACTIVE'
   },
   {
@@ -20,7 +22,8 @@ export default [
     email: 'amanda.costa@example.com',
     password: 'password123',
     confirmPassword: 'password123',
-    id: 0.22446486702940227,
+    document: '09784643383',
+    id: Math.random(),
     status: 'ACTIVE'
   },
   {
@@ -28,7 +31,8 @@ export default [
     email: 'lucas.oliveira@example.com',
     password: '987654321',
     confirmPassword: '987654321',
-    id: 0.22446486702940227,
+    document: '58482118412',
+    id: Math.random(),
     status: 'ACTIVE'
   },
   {
@@ -36,7 +40,8 @@ export default [
     email: 'isabela.silva@example.com',
     password: 'password123password',
     confirmPassword: 'password123password',
-    id: 0.22446486702940227,
+    document: '58482118412',
+    id: Math.random(),
     status: 'INACTIVE'
   }
 ]

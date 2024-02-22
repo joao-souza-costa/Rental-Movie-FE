@@ -24,7 +24,13 @@
       placeholder="Usuário responsável"
     />
 
-    <base-date-picker-input disabled class="w-full" name="dates" />
+    <base-date-picker-input
+      label="Data de alocação - Data de entrega"
+      disabled
+      class="w-full"
+      name="dates"
+      range
+    />
 
     <base-input-select
       class="w-full"
@@ -43,7 +49,7 @@ import { Form } from 'vee-validate'
 import BaseInputSelect from '@/components/BaseInputSelect.vue'
 import BaseDatePickerInput from '@/components/BaseDatePickerInput.vue'
 import BaseInput from '@/components/BaseInput.vue'
-import { STATUS_RENTAL_LABELS, enumRentalStatus, type iRental } from '@/app/services/ClientService'
+import { STATUS_RENTAL_LABELS, enumRentalStatus, type iRental } from '@/app/services/RentalService'
 import { computed } from 'vue'
 
 type tEmit = {

@@ -1,22 +1,23 @@
-import { defineStore } from 'pinia'
-import { ref, watch } from 'vue'
+import { defineStore, storeToRefs } from 'pinia'
+import { computed, ref } from 'vue'
 import { loggedUserKey } from '../constants/localStorageKeys'
 import { useMutation, useQuery, useQueryClient } from '@tanstack/vue-query'
 import clientService, {
   enumClientStatus,
-  type iAddRentalStatusParams,
-  type iGetAllClientsFilters,
-  type iUpdateRentalStatusParams
+  type iClient,
+  type iGetAllClientsFilters
 } from '../services/ClientService'
-import useLocalStorage from '../utils/useLocalStorage'
 import { useRoute } from 'vue-router'
+import { useAuthStore } from './useAuthStore'
 
 export const useClientStore = defineStore('client', () => {
-  const accessToken = ref<boolean>(Boolean(useLocalStorage(loggedUserKey).get().id))
+  const route = useRoute()
+  const authStore = storeToRefs(useAuthStore())
+
   const filters = ref<iGetAllClientsFilters>({
-    status: enumClientStatus.ALL,
-    firstName: '',
-    document: ''
+    status: (route.query.status as enumClientStatus) || enumClientStatus.ACTIVE,
+    firstName: route.query.firstName?.toString(),
+    document: route.query.documen?.toString()
   })
 
   const queryClient = useQueryClient()
@@ -26,10 +27,36 @@ export const useClientStore = defineStore('client', () => {
     isLoading,
     isRefetching
   } = useQuery({
-    queryKey: ['clients', filters.value],
+    queryKey: ['clients'],
     queryFn: async () => clientService.getAll(filters.value),
-    enabled: accessToken,
+    enabled: authStore.accessToken.value,
     staleTime: Infinity
+  })
+
+  const clientsFiltered = computed(() => {
+    return clients.value?.reduce((acc, value) => {
+      let hasFirstName = true
+      let hasDocument = true
+      let hasStatus = true
+
+      if (filters.value.firstName) {
+        const name = `${value.firstName} ${value.lastName}`
+        hasFirstName = name
+          .toLocaleLowerCase()
+          .includes(filters.value.firstName.toLocaleLowerCase())
+      }
+      if (filters.value.document) {
+        hasDocument = value.document.startsWith(filters.value.document)
+      }
+      if (filters.value.status !== enumClientStatus.ALL) {
+        hasStatus = filters.value.status === value.status
+      }
+
+      if (hasFirstName && hasDocument && hasStatus) {
+        acc.push(value)
+      }
+      return acc
+    }, [] as iClient[])
   })
 
   const { mutateAsync: createMutation, isPending: createLoading } = useMutation({
@@ -39,30 +66,12 @@ export const useClientStore = defineStore('client', () => {
     mutationFn: clientService.update
   })
 
-  const { mutateAsync: createRentalMutation, isPending: createRentalLoading } = useMutation({
-    mutationFn: clientService.addRental
-  })
-
-  const { mutateAsync: updateRentalStatusMutation, isPending: updateRentalStatusLoading } = useMutation(
-    {
-      mutationFn: clientService.updateRentalStatus
-    }
-  )
-
-  const invalidateClientsQuery = () => {
-    return queryClient.invalidateQueries({ queryKey: ['clients'] })
-  }
-
   const createClient = (values: any) => {
     return createMutation(values).then(invalidateClientsQuery)
   }
 
-  const createRental = (values: iAddRentalStatusParams) => {
-    return createRentalMutation(values).then(invalidateClientsQuery)
-  }
-
-  const updateRentalStatus = (values: iUpdateRentalStatusParams) => {
-    return updateRentalStatusMutation(values).then(invalidateClientsQuery)
+  const invalidateClientsQuery = () => {
+    return queryClient.invalidateQueries({ queryKey: ['clients'] })
   }
 
   const updateClient = (id: number, values: any) => {
@@ -72,33 +81,15 @@ export const useClientStore = defineStore('client', () => {
     }).then(invalidateClientsQuery)
   }
 
-  const route = useRoute()
-
-  watch(
-    () => route.query,
-    (v) => {
-      v.status
-        ? (filters.value.status = String(v.status) as enumClientStatus)
-        : (filters.value.status = enumClientStatus.ALL)
-
-      v.firstName && (filters.value.firstName = String(v.firstName))
-      v.document && (filters.value.document = String(v.document))
-    },
-    { deep: true, immediate: true }
-  )
-
   return {
-    clients,
+    clients: clientsFiltered,
+    clientsAll: clients,
     filters,
     isLoading,
     isRefetching,
     createLoading,
     updateLoading,
-    createRentalLoading,
     createClient,
-    updateClient,
-    createRental,
-    updateRentalStatus,
-    updateRentalStatusLoading
+    updateClient
   }
 })
