@@ -1,46 +1,24 @@
-# locadora
+## 💻 Projeto
 
-This template should help get you started developing with Vue 3 in Vite.
+O Locadora é uma plataforma simples e intuitiva para que você Gerenciar sua locadora.
 
-## Recommended IDE Setup
+## 📥 Instalando o Projeto
 
-[VSCode](https://code.visualstudio.com/) + [Volar](https://marketplace.visualstudio.com/items?itemName=Vue.volar) (and disable Vetur) + [TypeScript Vue Plugin (Volar)](https://marketplace.visualstudio.com/items?itemName=Vue.vscode-typescript-vue-plugin).
+### Programas necessários
 
-## Type Support for `.vue` Imports in TS
+- Git **(ou baixe o repositório como .zip)**
+- Node **(preferência na versão v18.16.0 ou maior)**
 
-TypeScript cannot handle type information for `.vue` imports by default, so we replace the `tsc` CLI with `vue-tsc` for type checking. In editors, we need [TypeScript Vue Plugin (Volar)](https://marketplace.visualstudio.com/items?itemName=Vue.vscode-typescript-vue-plugin) to make the TypeScript language service aware of `.vue` types.
+### Etapas
 
-If the standalone TypeScript plugin doesn't feel fast enough to you, Volar has also implemented a [Take Over Mode](https://github.com/johnsoncodehk/volar/discussions/471#discussioncomment-1361669) that is more performant. You can enable it by the following steps:
+- Após clonar o projeto vá até a pasta do projeto `locadora-test` e rode o comando `yarn` ou `npm install` para instalar as dependências do projeto;
 
-1. Disable the built-in TypeScript Extension
-    1) Run `Extensions: Show Built-in Extensions` from VSCode's command palette
-    2) Find `TypeScript and JavaScript Language Features`, right click and select `Disable (Workspace)`
-2. Reload the VSCode window by running `Developer: Reload Window` from the command palette.
+- Crie o arquivo `.env` na raíz do projeto e adicione as variáveis necessárias como mostra no arquivo de exemplo: `.env.example`;
 
-## Customize configuration
+- Rode o comando de build `yarn dev` ou `npm run dev`;
 
-See [Vite Configuration Reference](https://vitejs.dev/config/).
+### Considerações finais
 
-## Project Setup
-
-```sh
-npm install
-```
-
-### Compile and Hot-Reload for Development
-
-```sh
-npm run dev
-```
-
-### Type-Check, Compile and Minify for Production
-
-```sh
-npm run build
-```
-
-### Lint with [ESLint](https://eslint.org/)
-
-```sh
-npm run lint
-```
+- Caso optar por não seguir os passos a cima voce ainda pode acessar o site pela url: https://locadora-test.netlify.app/
+- E usar o login: "larissa.santos@example.com" e senha: "abcd1234"
+- Caso queira usar outros usuários voce pode visitar o arquivo "usersMocks" ou ver pelo localstorage mesmo!
