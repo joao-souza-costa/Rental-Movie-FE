@@ -32,11 +32,11 @@ O Video Rental Manager é uma plataforma simples e intuitiva para que você Gere
 
 - Acesse a url: https://joao-souza-costa.github.io/locadora-test/#/
 - Usuário ativo: 
-    - login: joao.souza@email.com
+    - login: joao.souza@example.com
     - senha: 123456789
     
 - Usuário inativo: 
-    - login: alice.souza@email.com
+    - login: alice.souza@example.com
     - senha: 123456789
 
 
@@ -59,11 +59,11 @@ O Video Rental Manager é uma plataforma simples e intuitiva para que você Gere
   
 - Usuarios para uso da aplicação
   - ativo: 
-    - login: joao.souza@email.com
+    - login: joao.souza@example.com
     - senha: 123456789
     
   - inativo: 
-    - login: alice.souza@email.com
+    - login: alice.souza@example.com
     - senha: 123456789
 
 ### Opção 3:
@@ -84,10 +84,10 @@ O Video Rental Manager é uma plataforma simples e intuitiva para que você Gere
 
 - Usuarios para uso da aplicação
   - ativo: 
-    - login: joao.souza@email.com
+    - login: joao.souza@example.com
     - senha: 123456789
     
   - inativo: 
-    - login: alice.souza@email.com
+    - login: alice.souza@example.com
     - senha: 123456789
 
