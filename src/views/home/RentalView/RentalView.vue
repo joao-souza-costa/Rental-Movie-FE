@@ -9,7 +9,7 @@
         Nesta página você vai poder gerenciar as suas locações
       </p>
 
-      <form class="mb-3 mt-3 flex flex-row gap-3">
+      <form class="mb-3 mt-3 flex flex-col md:flex-row gap-3">
         <base-input
           class="flex flex-[2]"
           type="text"
@@ -23,7 +23,7 @@
       </form>
     </div>
 
-    <rental-table  :list="data" :is-loading="false" @select-rental="(v) => toggleModal('EDIT', v)" />
+    <rental-table :list="data" :is-loading="false" @select-rental="(v) => toggleModal('EDIT', v)" />
 
     <edit-modal
       v-if="isOpenModal.EDIT_ITEM"

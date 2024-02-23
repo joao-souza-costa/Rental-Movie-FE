@@ -5,7 +5,6 @@ import vue from '@vitejs/plugin-vue'
 // https://vitejs.dev/config/ƒ
 export default defineConfig(({ mode, command }) => {
   const env = loadEnv(mode, process.cwd(), '')
-  console.log(env)
   return {
     base: '/locadora-test/',
     plugins: [vue()],
