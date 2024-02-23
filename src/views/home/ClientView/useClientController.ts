@@ -3,12 +3,11 @@ import { useClientStore } from '@/app/store/useClientStore'
 import useDebounce from '@/app/utils/useDebounce'
 import { useModals } from '@/app/utils/useModals'
 import { storeToRefs } from 'pinia'
-import { useRoute, useRouter } from 'vue-router'
+import { useRouter } from 'vue-router'
 
 export function useClientController() {
   const { clients, isLoading, isRefetching, filters } = storeToRefs(useClientStore())
   const router = useRouter()
-  const route = useRoute()
 
   const { isOpenModal, toggleModal } = useModals<iClient>()
 
@@ -16,7 +15,8 @@ export function useClientController() {
     filter: 'status' | 'firstName' | 'document',
     value: string | enumClientStatus | undefined
   ) => {
-    router.push({ query: { ...route.query, [filter]: value } })
+    filters.value[filter] = value
+    router.push({ query: { ...filters.value } })
   }
 
   const handleUpdateFirstName = useDebounce((value: string) => {

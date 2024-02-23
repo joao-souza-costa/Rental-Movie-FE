@@ -38,7 +38,9 @@ export default {
     let users = usersStorage.get() as iUser[] | null
     if (!users) users = []
 
-    const hasEmail = users?.find((user) => user.email === params.email)
+    const hasEmail = users?.find(
+      (user) => user.email.toLocaleLowerCase() === params.email.toLocaleLowerCase()
+    )
 
     if (hasEmail) throw new Error('Email já cadastrado')
 
@@ -46,7 +48,12 @@ export default {
 
     if (hasDocument) throw new Error('CPF já cadastrado')
 
-    const user = { ...params, id: Math.random(), status: enumUserStatus.ACTIVE }
+    const user = {
+      ...params,
+      email: params.email.toLocaleLowerCase(),
+      id: Math.random(),
+      status: enumUserStatus.ACTIVE
+    }
 
     users.push(user)
     usersStorage.set(users)

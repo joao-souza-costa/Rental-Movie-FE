@@ -16,7 +16,7 @@ export default {
     const users = usersStorage.get() as iUser[] | null
     const user = users?.find(
       (user) =>
-        user.email === params.email &&
+        user.email.toLocaleLowerCase() === params.email.toLocaleLowerCase() &&
         user.password === params.password &&
         user.status === enumUserStatus.ACTIVE
     )

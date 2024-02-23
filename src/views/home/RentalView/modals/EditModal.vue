@@ -2,7 +2,7 @@
   <base-modal
     class="max-w-[500px]"
     v-if="isOpen"
-    title="Mudar status"
+    title="Atualizar status"
     open
     @update:open="$emit('close')"
   >

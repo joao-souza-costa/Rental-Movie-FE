@@ -23,7 +23,7 @@
         <base-input
           :initial-value="initialValues?.document"
           name="document"
-          type="string"
+          type="number"
           id="document"
           placeholder="CPF"
         />
@@ -60,7 +60,7 @@
           <base-input
             name="cep"
             :initial-value="initialValues?.cep"
-            type="string"
+            type="text"
             id="cep"
             placeholder="CEP"
           />

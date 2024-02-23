@@ -20,6 +20,7 @@
     <create-modal :is-open="isOpenModal.CREATE" @close="toggleModal('CREATE')" />
 
     <edit-modal
+      v-if="isOpenModal.EDIT_ITEM"
       :is-open="isOpenModal.EDIT"
       :user="isOpenModal.EDIT_ITEM"
       @close="toggleModal('EDIT')"

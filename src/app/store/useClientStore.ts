@@ -1,5 +1,5 @@
 import { defineStore, storeToRefs } from 'pinia'
-import { computed, ref, watch } from 'vue'
+import { computed, ref } from 'vue'
 import { useMutation, useQuery, useQueryClient } from '@tanstack/vue-query'
 import clientService, {
   enumClientStatus,
@@ -81,11 +81,6 @@ export const useClientStore = defineStore('client', () => {
       id
     }).then(invalidateClientsQuery)
   }
-
-  watch(
-    () => route.query,
-    (v) => Object.keys(v).length !== 0 && (filters.value = v)
-  )
 
   return {
     clients: clientsFiltered,

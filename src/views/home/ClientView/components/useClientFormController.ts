@@ -10,7 +10,7 @@ export function useClientFormController() {
     firstName: Yup.string().required('Nome é obrigatório'),
     lastName: Yup.string().required(' Sobrenome é obrigatório'),
     document: Yup.string().required('CPF é obrigatório'),
-    email: Yup.string().required(' Email é obrigatório'),
+    email: Yup.string().email('Digite um email valido').required(' Email é obrigatório'),
     cellphone: Yup.string().required(' Celular é obrigatório'),
     cep: Yup.string().length(8, 'Cep precisa ter 8 digitos ').required('CEP é obrigatório'),
     street: Yup.string().required('Logradouro é obrigatório'),
@@ -19,7 +19,7 @@ export function useClientFormController() {
     state: Yup.string().required(' Estados é obrigatório')
   })
 
-  const { handleSubmit, values } = useForm({
+  const { handleSubmit, values, setFieldValue } = useForm({
     validationSchema: schema
   })
 
@@ -38,7 +38,16 @@ export function useClientFormController() {
 
   watch(
     () => values.cep,
-    useDebounce((v) => v?.length === 8 && refetch())
+    useDebounce(
+      (v) =>
+        v?.length === 8 &&
+        refetch().catch(() => {
+          setFieldValue('street', '')
+          setFieldValue('neighborhood', '')
+          setFieldValue('city', '')
+          setFieldValue('state', '')
+        })
+    )
   )
 
   return {

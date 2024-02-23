@@ -105,7 +105,7 @@ export default {
       (movie) => movie.status === enumRentalStatus.RENTED
     )
 
-    if (hasActiveRental) throw new Error('Cliente já tem um aluguel vigente')
+    if (hasActiveRental) throw new Error('Cliente já tem uma alocação vigente')
 
     const filteredBd = clientBd?.filter((item) => item.id !== params.clientId)
 
