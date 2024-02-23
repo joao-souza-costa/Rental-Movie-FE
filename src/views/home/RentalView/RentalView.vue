@@ -23,7 +23,7 @@
       </form>
     </div>
 
-    <rental-table :list="data" :is-loading="false" @select-rental="(v) => toggleModal('EDIT', v)" />
+    <rental-table  :list="data" :is-loading="false" @select-rental="(v) => toggleModal('EDIT', v)" />
 
     <edit-modal
       v-if="isOpenModal.EDIT_ITEM"

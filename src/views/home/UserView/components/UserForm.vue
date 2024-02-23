@@ -1,6 +1,6 @@
 <template>
   <Form
-    @submit="(v) => $emit('submit', v)"
+    @submit="(v) => $emit('submit', v as Omit<iUser, 'id'| 'expiredIn'>)"
     :validation-schema="schema"
     class="mt-5 flex flex-col items-center gap-4"
   >
@@ -52,12 +52,12 @@
 
 <script setup lang="ts">
 import { type iUser } from '@/app/services/UserService'
-import { Form, type GenericObject } from 'vee-validate'
+import { Form } from 'vee-validate'
 import BaseInput from '@/components/BaseInput.vue'
 import { useUserFormController } from './useUserFormController'
 
 type tEmit = {
-  (e: 'submit', v: GenericObject): void
+  (e: 'submit', v: Omit<iUser, 'id'| 'expiredIn'>): void
 }
 
 type tProps = {

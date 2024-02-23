@@ -1,11 +1,12 @@
 import { defineStore, storeToRefs } from 'pinia'
-import { computed, ref } from 'vue'
-import { loggedUserKey } from '../constants/localStorageKeys'
+import { computed, ref, watch } from 'vue'
 import { useMutation, useQuery, useQueryClient } from '@tanstack/vue-query'
 import clientService, {
   enumClientStatus,
   type iClient,
-  type iGetAllClientsFilters
+  type iCreateClientParams,
+  type iGetAllClientsFilters,
+  type iUpdateClientParams
 } from '../services/ClientService'
 import { useRoute } from 'vue-router'
 import { useAuthStore } from './useAuthStore'
@@ -17,7 +18,7 @@ export const useClientStore = defineStore('client', () => {
   const filters = ref<iGetAllClientsFilters>({
     status: (route.query.status as enumClientStatus) || enumClientStatus.ACTIVE,
     firstName: route.query.firstName?.toString(),
-    document: route.query.documen?.toString()
+    document: route.query.document?.toString()
   })
 
   const queryClient = useQueryClient()
@@ -28,7 +29,7 @@ export const useClientStore = defineStore('client', () => {
     isRefetching
   } = useQuery({
     queryKey: ['clients'],
-    queryFn: async () => clientService.getAll(filters.value),
+    queryFn: clientService.getAll,
     enabled: authStore.accessToken.value,
     staleTime: Infinity
   })
@@ -66,7 +67,7 @@ export const useClientStore = defineStore('client', () => {
     mutationFn: clientService.update
   })
 
-  const createClient = (values: any) => {
+  const createClient = (values: iCreateClientParams) => {
     return createMutation(values).then(invalidateClientsQuery)
   }
 
@@ -74,12 +75,17 @@ export const useClientStore = defineStore('client', () => {
     return queryClient.invalidateQueries({ queryKey: ['clients'] })
   }
 
-  const updateClient = (id: number, values: any) => {
+  const updateClient = (id: number, values: Omit<iUpdateClientParams, 'id'>) => {
     return updateMutation({
       ...values,
       id
     }).then(invalidateClientsQuery)
   }
+
+  watch(
+    () => route.query,
+    (v) => Object.keys(v).length !== 0 && (filters.value = v)
+  )
 
   return {
     clients: clientsFiltered,

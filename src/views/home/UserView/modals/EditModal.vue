@@ -37,7 +37,7 @@ import { toast } from '@/app/utils/toast'
 import { type iUser, enumUserStatus } from '@/app/services/UserService'
 import { ref } from 'vue'
 
-const props = defineProps<{ isOpen: boolean; user?: iUser }>()
+const props = defineProps<{ isOpen: boolean; user: iUser }>()
 const emit = defineEmits<{ close: [] }>()
 const userStore = useUserStore()
 
@@ -53,9 +53,9 @@ const options = [
   }
 ]
 
-const onSubmit = (v: any) => {
+const onSubmit = (v:iUser) => {
   userStore
-    .updateUser(props.user!.id, { ...v, status: statusValue.value })
+    .updateUser(props.user!.id, { ...v, status: statusValue.value || props.user.status })
     .then(() => toast.success('Usuário Editado com sucesso!'))
     .then(() => emit('close'))
     .catch((e) => toast.error(e.message|| 'Erro ao editar usuário'))

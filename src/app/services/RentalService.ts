@@ -48,10 +48,9 @@ export interface iGetAllParams {
 }
 
 const handleFilters = (filters: iGetAllParams) => {
-  return (acc: iRentalMovie[], client: iClient) => {
+  return (acc: iRental[], client: iClient) => {
     let hasClientName = true
-    let isAfterStartDate = true
-    let isBeforeDeliveryDate = true
+    let datesFilter = true
     const clientName = `${client.firstName} ${client.lastName}`
 
     const hasRental = client.rentals?.find((rent) => rent.status === enumRentalStatus.RENTED)
@@ -64,15 +63,23 @@ const handleFilters = (filters: iGetAllParams) => {
       }
 
       if (filters.startDate) {
-        isAfterStartDate = setMidnight(hasRental.startDate) === setMidnight(filters.startDate)
-      }
-      if (filters.deliveryDate) {
-        isBeforeDeliveryDate =
-          setMidnight(hasRental.deliveryDate) === setMidnight(filters.deliveryDate)
+        if (filters.startDate)
+          datesFilter = setMidnight(hasRental.startDate) === setMidnight(filters.startDate)
+
+        if (!datesFilter && filters.deliveryDate)
+          datesFilter = setMidnight(hasRental.deliveryDate) === setMidnight(filters.deliveryDate)
+
+      } else if (filters.deliveryDate) {
+        
+        if (filters.deliveryDate)
+          datesFilter = setMidnight(hasRental.deliveryDate) === setMidnight(filters.deliveryDate)
+
+        if (!datesFilter && filters.startDate)
+          datesFilter = setMidnight(hasRental.startDate) === setMidnight(filters.startDate)
       }
 
-      if (hasClientName && (isAfterStartDate || isBeforeDeliveryDate)) {
-        acc.push({ clientName, ...hasRental })
+      if (hasClientName && datesFilter) {
+        acc.push({ clientId: client.id, clientName, ...hasRental })
       }
     }
     return acc
@@ -86,7 +93,7 @@ const setMidnight = (value: string): number => {
 export default {
   getAll: async (filters: iGetAllParams) => {
     const clientBd = clientsStorage.get() as iClient[] | null
-    return clientBd?.reduce(handleFilters(filters), [] as iRentalMovie[])
+    return clientBd?.reduce(handleFilters(filters), [] as iRental[]) || []
   },
   addRental(params: iAddRentalStatusParams) {
     const clientBd = clientsStorage.get() as iClient[] | null

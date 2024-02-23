@@ -34,7 +34,7 @@ import BaseInputSelect from '@/components/BaseInputSelect.vue'
 
 import { useClientStore } from '@/app/store/useClientStore'
 import { toast } from '@/app/utils/toast'
-import { enumClientStatus, type iClient } from '@/app/services/ClientService'
+import { enumClientStatus, type iClient, type iCreateClientParams } from '@/app/services/ClientService'
 import { ref } from 'vue'
 
 const props = defineProps<{ isOpen: boolean; client?: iClient }>()
@@ -53,7 +53,7 @@ const options = [
   }
 ]
 
-const onSubmit = (v: any) => {
+const onSubmit = (v:  iCreateClientParams) => {
   clientStore
     .updateClient(props.client!.id, { ...v, status: statusValue.value || props.client?.status })
     .then(() => toast.success('Cliente Editado com sucesso!'))

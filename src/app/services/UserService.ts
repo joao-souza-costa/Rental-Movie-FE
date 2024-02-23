@@ -1,4 +1,5 @@
 import { loggedUserKey, usersKey } from '../constants/localStorageKeys'
+import { useAuthStore } from '../store/useAuthStore'
 import useLocalStorage from '../utils/useLocalStorage'
 
 export enum enumUserStatus {
@@ -52,7 +53,9 @@ export default {
     return Promise.resolve(user.id)
   },
   getAll: () => {
-    return Promise.resolve(usersStorage.get())
+    const userBd = usersStorage.get() as iUser[] | null
+    const authStore = useAuthStore()
+    return Promise.resolve(userBd?.filter((user) => user.id !== authStore?.user?.id))
   },
   update: (params: iUser) => {
     const userBd = usersStorage.get() as iUser[] | null

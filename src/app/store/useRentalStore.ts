@@ -17,13 +17,13 @@ export const useRentalStore = defineStore('rental', () => {
   const handleEndDate = (date: Date) => new Date(date.setDate(date.getDate() + 7)).toISOString()
 
   const filters = ref<iGetAllParams>({
-    startDate: route.query.startDate?.toString() || new Date().toISOString(),
-    deliveryDate: route.query.deliveryDate?.toString() || handleEndDate(new Date()),
+    startDate: route.query.startDate?.toString(),
+    deliveryDate: route.query.deliveryDate?.toString(),
     clientName: route.query.clientName?.toString()
   })
 
   const {
-    data: rentals = [],
+    data: rentals,
     isLoading,
     isRefetching
   } = useQuery({

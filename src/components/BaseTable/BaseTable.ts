@@ -4,6 +4,7 @@ import BaseSpinner from '../BaseSpinner.vue'
 
 const BaseTable = defineComponent({
   props: { isLoading: Boolean, notFoundDescription: String, list: Array },
+  name: 'BaseTable',
   components: {
     BaseSpinner
   },
@@ -35,6 +36,8 @@ const BaseTable = defineComponent({
 })
 
 const BaseHeader = defineComponent({
+  name: 'BaseTableHeader',
+
   template: /* html*/ `
   <header class="sticky p-5 top-0 flex justify-between border border-b-gray-300 bg-white">
   <slot />
@@ -42,6 +45,7 @@ const BaseHeader = defineComponent({
 })
 
 const BaseCell = defineComponent({
+  name: 'BaseTableCell',
   template: /* html*/ ` 
   <div
   class="py-3 px-5 cursor-pointer hover:bg-gray-100 flex items-center justify-between border border-b-gray-300 transition-all"

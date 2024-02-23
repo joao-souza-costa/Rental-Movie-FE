@@ -114,14 +114,13 @@
 </template>
 
 <script setup lang="ts">
-import { type iClient } from '@/app/services/ClientService'
-import { type GenericObject } from 'vee-validate'
+import { type iClient, type iCreateClientParams  } from '@/app/services/ClientService'
 import BaseInput from '@/components/BaseInput.vue'
 import { useClientFormController } from './useClientFormController'
 import BaseSpinner from '@/components/BaseSpinner.vue'
 
 type tEmit = {
-  (e: 'submit', v: GenericObject): void
+  (e: 'submit', v:  iCreateClientParams): void
 }
 
 type tProps = {
@@ -134,6 +133,6 @@ const emit = defineEmits<tEmit>()
 
 const { handleSubmit, address, isLoading, isRefetching } = useClientFormController()
 
-const onSubmit = handleSubmit((v) => emit('submit', v))
+const onSubmit = handleSubmit((v) => emit('submit', v as iCreateClientParams))
 
 </script>

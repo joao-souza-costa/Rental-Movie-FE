@@ -32,11 +32,14 @@ export const STATUS_LABELS: { [key in enumClientStatus]: string } = {
   [enumClientStatus.ALL]: 'Todos'
 }
 
+export type iCreateClientParams = Omit<iClient, 'id' | 'status' | 'rentals'>
+export type iUpdateClientParams = Omit<iClient, 'rentals'>
+
 export interface iGetAllClientsFilters
   extends Partial<Pick<iClient, 'document' | 'firstName' | 'status'>> {}
 
 export default {
-  create: async (params: Omit<iClient, 'id' | 'status' | 'rentals'>) => {
+  create: async (params: iCreateClientParams) => {
     const clientBd = clientsStorage.get() as iClient[] | null
 
     const client = { ...params, id: Math.random(), status: enumClientStatus.ACTIVE, rentals: [] }
@@ -59,10 +62,10 @@ export default {
 
     return Promise.resolve(client.id)
   },
-  getAll: async (filters: iGetAllClientsFilters) => {
+  getAll: async () => {
     return (clientsStorage.get() as iClient[]) || []
   },
-  update: async (params: iClient) => {
+  update: async (params: iUpdateClientParams) => {
     const clientBd = clientsStorage.get() as iClient[] | null
 
     const hasClient = clientBd?.find((client) => client.id === params.id)

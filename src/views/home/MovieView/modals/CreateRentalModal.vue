@@ -19,11 +19,13 @@ import BaseButton from '@/components/BaseButton.vue'
 import type { iMovie } from '@/app/services/MovieService'
 import { useRentalStore } from '@/app/store/useRentalStore'
 import { toast } from '@/app/utils/toast'
+import type { iAddRentalStatusParams } from '@/app/services/RentalService'
 defineProps<{ isOpen: boolean; movie?: iMovie }>()
 const emit = defineEmits<{ close: [] }>()
 
 const rentalStore = useRentalStore()
-const onSubmit = ({ name, dates, clientId }: any) => {
+
+const onSubmit = ({ name, dates, clientId }: iAddRentalStatusParams) => {
   rentalStore
     .createRental({ name, dates, clientId })
     .then(() => toast.success('Filme alugado com sucesso'))

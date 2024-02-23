@@ -32,7 +32,7 @@
 import BaseTable from '@/components/BaseTable/BaseTable'
 import type { iMovie } from '@/app/services/MovieService'
 
-defineProps<{ list?: any[]; isLoading: boolean; notFoundDescription?: string }>()
+defineProps<{ list?: iMovie[]; isLoading: boolean; notFoundDescription?: string }>()
 defineEmits<{ selectMovie: [v: iMovie] }>()
 </script>
 

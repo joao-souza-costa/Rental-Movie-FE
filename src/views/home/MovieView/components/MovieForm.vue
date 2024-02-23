@@ -19,7 +19,7 @@
 </template>
 
 <script setup lang="ts">
-import { useForm, type GenericObject } from 'vee-validate'
+import { useForm } from 'vee-validate'
 import BaseInput from '@/components/BaseInput.vue'
 import BaseComboBox from './ClientComboBox.vue'
 import BaseDatePickerInput from '@/components/BaseDatePickerInput.vue'
@@ -27,9 +27,10 @@ import BaseDatePickerInput from '@/components/BaseDatePickerInput.vue'
 import { useMovieFormController } from './useMovieFormController'
 import { watch } from 'vue'
 import type { iClient } from '@/app/services/ClientService'
+import type { iAddRentalStatusParams } from '@/app/services/RentalService'
 
 type tEmit = {
-  (e: 'submit', v: GenericObject): void
+  (e: 'submit', v: Partial<iAddRentalStatusParams>): void
 }
 
 type tProps = {

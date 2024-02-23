@@ -1,6 +1,6 @@
 import { defineStore, storeToRefs } from 'pinia'
 import { useMutation, useQuery, useQueryClient } from '@tanstack/vue-query'
-import userService from '../services/UserService'
+import userService, { type iCreateUserParams, type iUser } from '../services/UserService'
 import { useAuthStore } from './useAuthStore'
 
 export const useUserStore = defineStore('user', () => {
@@ -30,11 +30,11 @@ export const useUserStore = defineStore('user', () => {
     return queryUser.invalidateQueries({ queryKey: ['users'] })
   }
 
-  const createUser = (values: any) => {
+  const createUser = (values: iCreateUserParams) => {
     return createMutation(values).then(invalidateUsersQuery)
   }
 
-  const updateUser = (id: number, values: any) => {
+  const updateUser = (id: number, values: Omit<iUser, 'id'>) => {
     return updateMutation({
       ...values,
       id

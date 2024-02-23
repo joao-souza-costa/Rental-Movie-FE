@@ -1,7 +1,7 @@
 <template>
   <div class="w-full">
     <ComboboxRoot
-      :model-value="value"
+      :model-value="(value as iClient)"
       :displayValue="(v) => `${v.firstName} ${v.lastName}`"
       @update:model-value="handleChange"
       :filter-function="filterFunction"
@@ -49,6 +49,7 @@
 </template>
 
 <script setup lang="ts">
+import { type iClient } from '@/app/services/ClientService';
 import ChevronDownIcon from '@/assets/icons/ChevronDownIcon.vue'
 import BaseInputError from '@/components/BaseInputError.vue'
 import {

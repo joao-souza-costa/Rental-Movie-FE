@@ -5,7 +5,7 @@
         <p class="text-3xl font-bold">Filmes</p>
       </div>
       <p class="mt-5 text-1xl font-normal relative">
-        Nesta página você pode escolher filmes para akugar
+        Nesta página você pode escolher filmes para alugar
       </p>
     </div>
 

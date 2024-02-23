@@ -8,7 +8,10 @@
           :class="[errorMessage && '!border-red-900 text-red-900']"
           @click="toggleOpen"
         >
-          <label class="absolute left-[13px] top-1 pointer-events-none text-xs text-gray-700">
+          <label
+            class="absolute pointer-events-none text-xs text-gray-700 left-[13px] top-1 transition-all"
+            :class="[!formatValue && 'top-4 text-opacity-60 !text-base']"
+          >
             {{ label }}
           </label>
           <span>{{ formatValue }}</span>
@@ -64,10 +67,15 @@ const isOpen = ref<boolean>(false)
 
 const normalValue = computed<Date>({
   get() {
-    return new Date(value.value as string)
+    if (value.value) return new Date(value.value as string)
+    return ''
   },
   set(v) {
-    v instanceof Date && setValue(v.toISOString())
+    if (!(v instanceof Date)) return
+
+    if (v.toISOString() === value.value) return setValue('')
+
+    setValue(v.toISOString())
   }
 })
 
@@ -90,11 +98,14 @@ const toggleOpen = (v: any): void => {
 }
 
 const formatValue = computed(() => {
+  if (!datePickerValue.value) return
+
   if (props.range) {
     const [start, end] = datePickerValue.value as string[]
 
     return `${formatDate(start)} - ${formatDate(end)}`
   }
+
   return formatDate(datePickerValue.value)
 })
 </script>
