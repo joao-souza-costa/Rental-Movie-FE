@@ -9,7 +9,7 @@
     </template>
 
     <template #default="props: iMovie">
-      <BaseTable.Cell @click="$emit('selectMovie', props)">
+      <BaseTable.Cell data-test-id="table-cell" @click="$emit('selectMovie', props)">
         <div class="w-1/3">
           <span class="text-gray-700 text-base block text-ellipsis overflow-hidden">
             {{ props.Title }}

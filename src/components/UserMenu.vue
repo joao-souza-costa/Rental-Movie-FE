@@ -22,10 +22,8 @@ import { useAuthStore } from '@/app/store/useAuthStore'
 import BaseDropdown from './Dropdown/BaseDropdown'
 import ExitIcon from '@/assets/icons/ExitIcon.vue'
 import { computed } from 'vue'
-import { useRouter } from 'vue-router'
 
 const authStore = useAuthStore()
-const router = useRouter()
 
 const handleSignout = () => {
   authStore.signout()
@@ -42,4 +40,3 @@ const name = computed(() => {
   return value.toUpperCase()
 })
 </script>
-@/app/store/useAuthStore

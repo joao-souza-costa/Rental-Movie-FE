@@ -1,3 +1,5 @@
+import type { iUser } from '@/app/services/UserService'
+
 export default [
   {
     name: 'João Souza',
@@ -17,4 +19,4 @@ export default [
     status: 'INACTIVE',
     id: 0.5588855046319028
   }
-]
+] as iUser[]

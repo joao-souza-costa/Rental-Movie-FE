@@ -35,8 +35,9 @@ export const STATUS_LABELS: { [key in enumClientStatus]: string } = {
 export type iCreateClientParams = Omit<iClient, 'id' | 'status' | 'rentals'>
 export type iUpdateClientParams = Omit<iClient, 'rentals'>
 
-export interface iGetAllClientsFilters
-  extends Partial<Pick<iClient, 'document' | 'firstName' | 'status'>> {}
+export interface iGetAllClientsFilters extends Partial<Pick<iClient, 'document' | 'status'>> {
+  name?: string
+}
 
 export default {
   create: async (params: iCreateClientParams) => {
@@ -86,5 +87,28 @@ export default {
     clientsStorage.set(filteredBd)
 
     return Promise.resolve(params.id)
+  },
+  handleFilter(filters: iGetAllClientsFilters) {
+    return (acc: iClient[], client: iClient) => {
+      let hasFirstName = true
+      let hasDocument = true
+      let hasStatus = true
+
+      if (filters.name) {
+        const name = `${client.firstName} ${client.lastName}`
+        hasFirstName = name.toLocaleLowerCase().includes(filters.name.toLocaleLowerCase())
+      }
+      if (filters.document) {
+        hasDocument = client.document.startsWith(filters.document)
+      }
+      if (filters.status !== enumClientStatus.ALL) {
+        hasStatus = filters.status === client.status
+      }
+
+      if (hasFirstName && hasDocument && hasStatus) {
+        acc.push(client)
+      }
+      return acc
+    }
   }
 }

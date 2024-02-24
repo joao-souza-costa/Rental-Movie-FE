@@ -9,7 +9,7 @@
     </template>
 
     <template #default="props: iClient">
-      <BaseTable.Cell @click="$emit('selectedClient', props)">
+      <BaseTable.Cell data-test-id="table-cell" @click="$emit('selectedClient', props)">
         <div class="w-1/3">
           <span class="text-gray-700 text-base block text-ellipsis overflow-hidden">
             {{ props.firstName }} {{ props.lastName }}

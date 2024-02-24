@@ -17,6 +17,7 @@ export interface iUser {
   email: string
   document: string
   password: string
+  confirmPassword: string
   status: enumUserStatus
   expiresIn: number
 }

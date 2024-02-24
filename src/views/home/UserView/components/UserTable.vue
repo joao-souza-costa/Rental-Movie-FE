@@ -9,7 +9,7 @@
     </template>
 
     <template #default="props: iUser">
-      <BaseTable.Cell @click="$emit('selectedUser', props)">
+      <BaseTable.Cell data-test-id="table-cell" @click="$emit('selectedUser', props)">
         <div class="w-1/3">
           <span class="text-gray-700 text-base block text-ellipsis overflow-hidden">
             {{ props.name }}

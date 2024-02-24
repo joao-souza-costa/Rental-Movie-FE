@@ -12,7 +12,7 @@ export function useClientController() {
   const { isOpenModal, toggleModal } = useModals<iClient>()
 
   const updateFilters = (
-    filter: 'status' | 'firstName' | 'document',
+    filter: 'status' | 'name' | 'document',
     value: string | enumClientStatus | undefined
   ) => {
     filters.value[filter] = value
@@ -20,7 +20,7 @@ export function useClientController() {
   }
 
   const handleUpdateFirstName = useDebounce((value: string) => {
-    updateFilters('firstName', value)
+    updateFilters('name', value)
   })
 
   const handleUpdateStatus = (value: string) => {

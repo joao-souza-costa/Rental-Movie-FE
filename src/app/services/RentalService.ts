@@ -143,5 +143,6 @@ export default {
     clientsStorage.set(filteredBd)
 
     return Promise.resolve(true)
-  }
+  },
+  handleFilters
 }

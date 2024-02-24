@@ -9,4 +9,4 @@ const clients = useLocalStorage(clientsKey)
 
 if (!user.get()) user.set(usersMocks)
 
-if (!clients.get()) clients.set(clientsMocks)
+if (!clients.get()) clients.set(clientsMocks.clients)

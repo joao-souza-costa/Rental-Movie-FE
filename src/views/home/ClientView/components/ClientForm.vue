@@ -127,7 +127,7 @@ type tProps = {
   initialValues?: iClient
 }
 
-const props = defineProps<tProps>()
+defineProps<tProps>()
 
 const emit = defineEmits<tEmit>()
 

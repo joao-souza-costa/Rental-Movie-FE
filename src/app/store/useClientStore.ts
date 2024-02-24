@@ -17,7 +17,7 @@ export const useClientStore = defineStore('client', () => {
 
   const filters = ref<iGetAllClientsFilters>({
     status: (route.query.status as enumClientStatus) || enumClientStatus.ACTIVE,
-    firstName: route.query.firstName?.toString(),
+    name: route.query.name?.toString(),
     document: route.query.document?.toString()
   })
 
@@ -35,29 +35,7 @@ export const useClientStore = defineStore('client', () => {
   })
 
   const clientsFiltered = computed(() => {
-    return clients.value?.reduce((acc, value) => {
-      let hasFirstName = true
-      let hasDocument = true
-      let hasStatus = true
-
-      if (filters.value.firstName) {
-        const name = `${value.firstName} ${value.lastName}`
-        hasFirstName = name
-          .toLocaleLowerCase()
-          .includes(filters.value.firstName.toLocaleLowerCase())
-      }
-      if (filters.value.document) {
-        hasDocument = value.document.startsWith(filters.value.document)
-      }
-      if (filters.value.status !== enumClientStatus.ALL) {
-        hasStatus = filters.value.status === value.status
-      }
-
-      if (hasFirstName && hasDocument && hasStatus) {
-        acc.push(value)
-      }
-      return acc
-    }, [] as iClient[])
+    return clients.value?.reduce(clientService.handleFilter(filters.value), [] as iClient[])
   })
 
   const { mutateAsync: createMutation, isPending: createLoading } = useMutation({
