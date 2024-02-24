@@ -11,7 +11,7 @@
     </div>
 
     <base-input
-      :initial-value="filters?.firstName"
+      :initial-value="filters?.name"
       class="mb-2"
       name="name"
       type="text"

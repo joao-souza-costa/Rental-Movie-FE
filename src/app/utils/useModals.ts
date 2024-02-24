@@ -1,4 +1,4 @@
-import { reactive, type UnwrapRef } from 'vue'
+import { reactive } from 'vue'
 
 export function useModals<T>() {
   const isOpenModal = reactive<{
@@ -11,8 +11,8 @@ export function useModals<T>() {
     EDIT_ITEM: undefined
   })
 
-  const toggleModal = (type: 'CREATE' | 'EDIT', client?: T): void => {
-    if (type === 'EDIT' && client) isOpenModal.EDIT_ITEM = client as UnwrapRef<T>
+  const toggleModal = (type: 'CREATE' | 'EDIT', item?: T): void => {
+    if (type === 'EDIT' && item) isOpenModal.EDIT_ITEM = item as T
     isOpenModal[type] = !isOpenModal[type]
   }
   return {
