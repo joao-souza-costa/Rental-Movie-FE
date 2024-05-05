@@ -1,93 +1,93 @@
 ## 💻 Projeto
 
-O Video Rental Manager é uma plataforma simples e intuitiva para que você Gerenciar sua locadora.
+Video Rental Manager is a simple and intuitive platform for you to manage your rental company.
 
-## Funcionalidades
+## Functionalities
 
-- Tela de usuário nessa tela você terá as seguintes funcionalidades: 📦
-  - Criar um usuário quando aperta no botão "adicionar"
-  - Editar o usuário ao selecionar ele na tabela
-  - Fazer um "soft delete" ao editar e inativar um usuário
+- User screen on this screen you will have the following features: 📦
+  - Create a user when you press the "add" button
+  - Edit the user by selecting him in the table
+  - Perform a "soft delete" when editing and inactivating a user
     
-- Tela de clientes nessa tela você terá as seguintes funcionalidade:📦
-  - Criar um cliente quando aperta no botão "adicionar"
-  - Editar o cliente ao selecionar ele na tabela
-  - Fazer um "soft delete" ao editar inativar um cliente
-  - Também é possível fazer filtro pelo nome do cliente, documento e status
-  - Ao dar reload na página os filtros não são perdidos
+- Customers screen on this screen you will have the following functionality:📦
+  - Create a client when you press the "add" button
+  - Edit the customer by selecting them in the table
+  - Perform a "soft delete" when editing to inactivate a client
+  - It is also possible to filter by customer name, document and status
+  - When reloading the page, the filters are not lost
  
-- Tela de filmes nessa tela você terá as seguintes funcionalidade: 📦
-  - Filtrar os filmes por nomes e ano
-  - Você também pode alugar um filme ao selecionar ele na tabela
+- Movie screen on this screen you will have the following functionality: 📦
+  - Filter films by name and year
+  - You can also rent a movie by selecting it in the table
   
-- Tela de alocações nessa tela você terá as seguintes funcionalidade: 📦
-  - Você conseguirá filtrar por nome do cliente 
-  - Você conseguirá filtrar pela data de alocação, retornando todos os dados que tem a data de locação escolhida
-  - Você conseguirá filtrar pela data de entrega, retornando todos os dados que tem a data de entregra escolhida
+- Allocations screen on this screen you will have the following functionality: 📦
+  - You will be able to filter by customer name
+  - You will be able to filter by the allocation date, returning all data that has the chosen rental date
+  - You will be able to filter by delivery date, returning all data that has the chosen delivery date
 
+## 📥 Installing the Project
 
-## 📥 Instalando o Projeto
+### Option 1:
 
-### Opção 1:
-
-- Acesse a url: https://joao-souza-costa.github.io/locadora-test/#/
-- Usuário ativo: 
+- Access the url: https://joao-souza-costa.github.io/locadora-test/#/
+  
+- Active user: 
     - login: joao.souza@example.com
     - senha: 123456789
     
-- Usuário inativo: 
+- Inactive User  
     - login: alice.souza@example.com
     - senha: 123456789
 
 
-### Opção 2:
+### Option 2:
 
-#### Pré-requisitos
+#### Prerequisites
 
-- Para usar esta opção é necessário ter o docker instalado em seu computador
+- To use this option you must have Docker installed on your computer.q
   - [Windows](https://docs.docker.com/windows/started)
   - [MAC](https://docs.docker.com/mac/started/)
   - [Linux](https://docs.docker.com/linux/started/)
 
 #### Etapas
 
-- Após a instalação do docker siga as seguintes instruções: 
-  - Faça um clone do projeto para o seu diretório
-  - Dentro do diretório crie o arquivo `.env` na raíz do projeto e adicione as variáveis necessárias como mostra no arquivo de exemplo: `.env.example`;
-  - Digite o comando `docker-compose -up` no terminal 
-  - Após a criação do container copie e cole a url fornecida em seu navegador de preferencia
-  
-- Usuarios para uso da aplicação
-  - ativo: 
+- After installing docker, follow the following instructions:
+  - Clone the project to your directory
+  - Inside the directory, create the `.env` file at the root of the project and add the necessary variables as shown in the example file: `.env.example`;
+  - Enter the command `docker-compose -up` in the terminal
+  - After creating the container, copy and paste the URL provided into your preferred browser
+
+- Users
+   - Active user: 
     - login: joao.souza@example.com
     - senha: 123456789
     
-  - inativo: 
+- Inactive User  
     - login: alice.souza@example.com
     - senha: 123456789
 
-### Opção 3:
+### Option 3:
 
-#### Pré-requisitos
+#### Prerequisites
 
-- Node **(preferência na versão v18.16.0 ou maior)**
+- Node **(preferably version v18.16.0 or higher)**
    - [Node.js](https://nodejs.org/en/download/)
    
 #### Etapas
 
-- Após a instalação do node.js siga as seguintes instruções: 
-  - Faça um clone do projeto para o seu diretório
-  - Dentro do diretório crie o arquivo `.env` na raíz do projeto e adicione as variáveis necessárias como mostra no arquivo de exemplo: `.env.example`;
-  - Digite o comando `yarn` ou `npm install` para instalar as dependencias
-  - Digite o comando de build `yarn dev` ou `npm run dev` para rodar o projeto
-  - Copie e cole a url fornecida em seu navegador de preferencia
+- After installing node.js, follow the following instructions:
+  - Clone the project to your directory
+  - Inside the directory, create the `.env` file at the root of the project and add the necessary variables as shown in the example file: `.env.example`;
+  - Type the command `yarn` or `npm install` to install the dependencies
+  - Enter the build command `yarn dev` or `npm run dev` to run the project
+  - Copy and paste the URL provided into your preferred browser
 
-- Usuarios para uso da aplicação
-  - ativo: 
+- Users
+   - Active user: 
     - login: joao.souza@example.com
     - senha: 123456789
     
-  - inativo: 
+- Inactive User  
     - login: alice.souza@example.com
     - senha: 123456789
 
