@@ -52,7 +52,7 @@ Video Rental Manager is a simple and intuitive platform for you to manage your r
   - [MAC](https://docs.docker.com/mac/started/)
   - [Linux](https://docs.docker.com/linux/started/)
 
-#### Etapas
+#### Steps
 
 - After installing docker, follow the following instructions:
   - Clone the project to your directory
@@ -76,7 +76,7 @@ Video Rental Manager is a simple and intuitive platform for you to manage your r
 - Node **(preferably version v18.16.0 or higher)**
    - [Node.js](https://nodejs.org/en/download/)
    
-#### Etapas
+#### Steps
 
 - After installing node.js, follow the following instructions:
   - Clone the project to your directory
