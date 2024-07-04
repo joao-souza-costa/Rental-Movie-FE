@@ -2,6 +2,9 @@
 
 Video Rental Manager is a simple and intuitive platform for you to manage your rental company.
 
+## Stacks
+<img src="https://skillicons.dev/icons?i=html,css,javascript,typescript,docker,git,vue,vite,tailwindcss" width="415px" alt="Technologies" />
+
 ## Functionalities
 
 - User screen on this screen you will have the following features: 📦
